@@ -4,20 +4,39 @@ public class CreatureController : MonoBehaviour
 {
     public enum CreatureState { Alive, Egg, Extinct }
 
-    [Min(0.1f)] [SerializeField] float lifespan = 10;
+    [SerializeField] [Min(1)] float lifespan = 10;
+    [SerializeField] [Min(0.01f)] float speed = 1f;
 
     CreatureState state;
     readonly Timer timer = new Timer();
 
+    PlayerController playerController;
+    float movementSeed;
+
     void Start()
     {
         SetState(CreatureState.Alive);
+
+        if (TryGetComponent(out PlayerController playerController))
+            this.playerController = playerController;
+
+        movementSeed = Random.Range(0, 100);
     }
 
     void Update()
     {
         if (state == CreatureState.Egg && Input.GetKeyDown(KeyCode.Alpha1))
             SetState(CreatureState.Alive);
+
+        // Move
+        if (playerController != null)
+            transform.Translate(playerController.MoveDirection * speed * Time.deltaTime);
+        else
+        {
+            float angle = Mathf.Lerp(-Mathf.PI, Mathf.PI, Mathf.PerlinNoise(Time.time + movementSeed, 0));
+            Vector2 moveDirection = new Vector2(Mathf.Cos(angle) * speed, Mathf.Sin(angle));
+            transform.Translate(moveDirection * speed * Time.deltaTime);
+        }
     }
 
     void SetState(CreatureState newState)

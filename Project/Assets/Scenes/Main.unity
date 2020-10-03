@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eaedbe8ac5d04643ab575e6d9e77ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.01
+  speed: 1
 --- !u!114 &184290742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,6 +651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668599731}
   - component: {fileID: 1668599730}
+  - component: {fileID: 1668599732}
   m_Layer: 0
   m_Name: Other creature 2
   m_TagString: Untagged
@@ -723,6 +724,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668599732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668599729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a89fe5d486641649b29ab33a967efe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifespan: 10
 --- !u!1 &1676031883
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1676031885}
   - component: {fileID: 1676031884}
+  - component: {fileID: 1676031886}
   m_Layer: 0
   m_Name: Other creature 1
   m_TagString: Untagged
@@ -805,6 +820,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1676031886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676031883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a89fe5d486641649b29ab33a967efe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifespan: 10
 --- !u!1 &2025269398
 GameObject:
   m_ObjectHideFlags: 0
