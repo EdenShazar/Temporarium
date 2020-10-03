@@ -52,7 +52,7 @@ public class Timer
 
             if (ElapsedTime > Period)
             {
-                OnTick();
+                OnTick?.Invoke();
                 // Reset time is not precise since it might overshoot the last tick, but it's good enough
                 ResetTime();
             }
