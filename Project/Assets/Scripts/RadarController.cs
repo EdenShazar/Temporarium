@@ -38,7 +38,7 @@ public class RadarController : MonoBehaviour
  
         bool IsPointInEllipse(Vector3 pnt) {
         return
-            ((-(pnt.x - transform.position.x) / (rx * rx)) +
-            (-(pnt.y - transform.position.y) / (ry * ry))) <= 1;
+            (((pnt.x - transform.position.x) / (rx * rx)) +
+            ((pnt.y - transform.position.y) / (ry * ry))) <= 1;
     }
 }
