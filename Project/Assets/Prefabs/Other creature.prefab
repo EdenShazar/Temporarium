@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 5
   movementSpeed: 3
-  franticness: 10
+  franticness: 5
   minDirection: -0.41
   maxDirection: -1.7
   livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
