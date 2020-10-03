@@ -5,37 +5,43 @@ public class CreatureController : MonoBehaviour
     public enum CreatureState { Alive, Egg, Extinct }
 
     [SerializeField] [Min(1)] float lifespan = 10;
-    [SerializeField] [Min(0.01f)] float speed = 1f;
+    [SerializeField] [Min(0.01f)] float movementSpeed = 1f;
+    [SerializeField] [Min(0.01f)] float franticness = 1f;
+    [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float minDirection = -Mathf.PI;
+    [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float maxDirection = Mathf.PI;
 
     CreatureState state;
     readonly Timer timer = new Timer();
 
     PlayerController playerController;
-    float movementSeed;
+    bool isPlayer;
+
+    float nonPlayerMovementSeed;
 
     void Start()
     {
         SetState(CreatureState.Alive);
 
-        if (TryGetComponent(out PlayerController playerController))
+        isPlayer = TryGetComponent(out PlayerController playerController);
+        if (isPlayer)
             this.playerController = playerController;
-
-        movementSeed = Random.Range(0, 100);
+            
+        nonPlayerMovementSeed = Random.Range(0, 100);
     }
 
     void Update()
     {
-        if (state == CreatureState.Egg && Input.GetKeyDown(KeyCode.Alpha1))
+        if (state == CreatureState.Egg && isPlayer && Input.GetKeyDown(KeyCode.Alpha1))
             SetState(CreatureState.Alive);
 
-        // Move
-        if (playerController != null)
-            transform.Translate(playerController.MoveDirection * speed * Time.deltaTime);
-        else
+        if (state == CreatureState.Alive)
+            Move();
+
+        if (minDirection > maxDirection)
         {
-            float angle = Mathf.Lerp(-Mathf.PI, Mathf.PI, Mathf.PerlinNoise(Time.time + movementSeed, 0));
-            Vector2 moveDirection = new Vector2(Mathf.Cos(angle) * speed, Mathf.Sin(angle));
-            transform.Translate(moveDirection * speed * Time.deltaTime);
+            float temp = minDirection;
+            minDirection = maxDirection;
+            maxDirection = temp;
         }
     }
 
@@ -84,5 +90,47 @@ public class CreatureController : MonoBehaviour
     void EndDynasty()
     {
         SetState(CreatureState.Extinct);
+    }
+
+    void Move()
+    {
+        if (playerController != null)
+            transform.Translate(GetPlayerMoveDirection() * movementSpeed * Time.deltaTime);
+        else
+            transform.Translate(GetRandomMoveDirection() * movementSpeed * Time.deltaTime);
+    }
+
+    Vector2 GetPlayerMoveDirection()
+    {
+        float angle = Mathf.Clamp(playerController.MoveAngle, minDirection, maxDirection);
+
+#if UNITY_EDITOR
+        Debug.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0));
+#endif
+
+        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    }
+    
+    Vector2 GetRandomMoveDirection()
+    {
+        float t = Mathf.PerlinNoise(Time.time * franticness + nonPlayerMovementSeed, 0);
+        float angle = Mathf.Lerp(minDirection, maxDirection, t);
+
+#if UNITY_EDITOR
+        Debug.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0));
+#endif
+
+        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Vector3 minVector = new Vector3(Mathf.Cos(minDirection), Mathf.Sin(minDirection), 0);
+        Gizmos.DrawLine(transform.position, transform.position + minVector);
+
+        Gizmos.color = Color.magenta;
+        Vector3 maxVector = new Vector3(Mathf.Cos(maxDirection), Mathf.Sin(maxDirection), 0);
+        Gizmos.DrawLine(transform.position, transform.position + maxVector);
     }
 }

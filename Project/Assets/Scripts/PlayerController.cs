@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     Vector3 mouseScreenPos;
     Vector3 objectScreenPos;
 
-    public Vector2 MoveDirection { get; private set; }
+    public float MoveAngle { get; private set; }
 
     void Update()
     {
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
         // calculate diff in screen space
         mouseScreenPos = Input.mousePosition;
         objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
-        MoveDirection = (mouseScreenPos - objectScreenPos).normalized;
+        MoveAngle = (mouseScreenPos - objectScreenPos).ToVector2().GetAngleRad();
     }
 }
 
