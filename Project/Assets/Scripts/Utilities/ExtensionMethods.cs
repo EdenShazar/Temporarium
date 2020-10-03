@@ -22,6 +22,20 @@ public static class FloatExtensionMethods
         while (value > Mathf.PI) value -= twoPi;
         return value;
     }
+
+    public static float ClampAngleRad(this float value, float min, float max)
+    {
+        if (min <= value && value <= max)
+            return value;
+
+        float deltaToMin = (min - value).WrapAngleRad();
+        float deltaToMax = (max - value).WrapAngleRad();
+
+        if (Mathf.Abs(deltaToMin) < Mathf.Abs(deltaToMax))
+            return min;
+        else
+            return max;
+    }
 }
 
 public static class Vector3ExtensionMethods
