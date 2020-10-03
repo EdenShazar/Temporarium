@@ -192,7 +192,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!4 &184290740
@@ -233,11 +233,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a89fe5d486641649b29ab33a967efe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifespan: 10
-  movementSpeed: 1
+  lifespan: 4
+  movementSpeed: 4
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
+  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
+  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!58 &184290743
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2231,7 +2233,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!4 &1668599731
@@ -2265,6 +2267,8 @@ MonoBehaviour:
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
+  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
+  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!58 &1668599733
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2370,7 +2374,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!4 &1676031885
@@ -2404,6 +2408,8 @@ MonoBehaviour:
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
+  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
+  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!58 &1676031887
 CircleCollider2D:
   m_ObjectHideFlags: 0
