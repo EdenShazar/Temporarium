@@ -24,11 +24,7 @@ public class PlayerController : MonoBehaviour
         // calculate diff in screen space
         mouseScreenPos = Input.mousePosition;
         objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
-
-        float deltaX = mouseScreenPos.x - objectScreenPos.x;
-        float deltaY = mouseScreenPos.y - objectScreenPos.y;
-
-        Vector2 moveVector = new Vector2(deltaX, deltaY).normalized * speed;
+        Vector2 moveVector = (mouseScreenPos - objectScreenPos).normalized * speed;
         transform.Translate(moveVector, this.transform);
     }
 }
