@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2178560850597934439}
   - component: {fileID: 2178560850597934438}
   - component: {fileID: 2178560850597934457}
-  - component: {fileID: 2178560850597934456}
-  m_Layer: 0
+  - component: {fileID: 2301064847564935422}
+  m_Layer: 9
   m_Name: Other creature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,8 +103,6 @@ MonoBehaviour:
   franticness: 5
   minDirection: -0.41
   maxDirection: -1.7
-  livingSprite: {fileID: 21300000, guid: 24db4a7700ece7645822732c800831cb, type: 3}
-  eggSprite: {fileID: 21300000, guid: 24db4a7700ece7645822732c800831cb, type: 3}
 --- !u!58 &2178560850597934438
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -142,40 +140,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2178560850597934456
-MonoBehaviour:
+--- !u!95 &2301064847564935422
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2178560850597934434}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_ApplyToSortingLayers: 8349d2e700000000c376c45f
-  m_ShapePath:
-  - {x: -0.22710991, y: 0.14487648, z: 0}
-  - {x: 0.42, y: 0, z: 0}
-  - {x: 0.7455015, y: 0.06830597, z: 0}
-  - {x: 0.73733807, y: 0.2976942, z: 0}
-  - {x: 0.8250904, y: 0.48859596, z: 0}
-  - {x: 0.84920216, y: 0.7179842, z: 0}
-  - {x: 0.7340107, y: 0.89313173, z: 0}
-  - {x: 0.6892538, y: 1.0798888, z: 0}
-  - {x: 0.6594162, y: 0.9155426, z: 0}
-  - {x: 0.59228134, y: 0.74372625, z: 0}
-  - {x: 0.37595654, y: 0.6989045, z: 0}
-  - {x: 0.5699024, y: 0.5644398, z: 0}
-  - {x: 0.59490395, y: 0.38974667, z: 0}
-  - {x: 0.5237007, y: 0.24713421, z: 0}
-  - {x: 0.14997673, y: 0.16262245, z: 0}
-  m_ShapePathHash: -1801035136
-  m_Mesh: {fileID: 0}
-  m_InstanceId: 30166
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a72dc23ce262b3d48a2c435795653bcb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

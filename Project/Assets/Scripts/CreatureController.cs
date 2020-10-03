@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animator))]
 public class CreatureController : MonoBehaviour
 {
     public enum CreatureState { Alive, Egg, Extinct }
@@ -11,16 +11,18 @@ public class CreatureController : MonoBehaviour
     [SerializeField] [Min(0.01f)] float franticness = 1f;
     [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float minDirection = -Mathf.PI;
     [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float maxDirection = Mathf.PI;
-    [SerializeField] Sprite livingSprite;
-    [SerializeField] Sprite eggSprite;
 
     CreatureState state;
     readonly Timer timer = new Timer();
 
-    SpriteRenderer spriteRenderer;
+    Animator animator;
 
     PlayerController playerController;
     bool isPlayer;
+
+    Collider2D collider;
+
+    ScaleManager sm; 
 
     #region Non-player fields
 
@@ -28,11 +30,18 @@ public class CreatureController : MonoBehaviour
 
     #endregion
 
-    ScaleManager sm; 
+    #region Animator hashes
+
+    readonly int hatch = Animator.StringToHash("Hatch");
+    readonly int die = Animator.StringToHash("Die");
+    readonly int deathType = Animator.StringToHash("Death type");
+
+    #endregion
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();
         sm = FindObjectOfType<ScaleManager>();
 
         isPlayer = TryGetComponent(out PlayerController playerController);
@@ -40,7 +49,9 @@ public class CreatureController : MonoBehaviour
             this.playerController = playerController;
             
         nonPlayerMovementSeed = Random.Range(0, 100);
-        
+
+        InitializeAnimator();
+
         SetState(CreatureState.Alive);
     }
 
@@ -56,9 +67,6 @@ public class CreatureController : MonoBehaviour
             case CreatureState.Alive:
                 AliveBehavior();
                 break;
-            case CreatureState.Extinct:
-                ExtinctBehavior();
-                break;
         }
 
         if (minDirection > maxDirection)
@@ -67,6 +75,11 @@ public class CreatureController : MonoBehaviour
             minDirection = maxDirection;
             maxDirection = temp;
         }
+    }
+
+    void ResetValues()
+    {
+        InitializeAnimator();
     }
 
     void EggBehavior()
@@ -78,11 +91,6 @@ public class CreatureController : MonoBehaviour
     void AliveBehavior()
     {
         Move();
-    }
-
-    void ExtinctBehavior()
-    {
-
     }
 
     void UpdateScale()
@@ -100,6 +108,8 @@ public class CreatureController : MonoBehaviour
             case CreatureState.Egg:
                 Debug.Log(gameObject.name + " died after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
 
+                animator.SetBool(die, true);
+
                 if (!isPlayer)
                 {
                     timer.SetPeriod(Random.Range(lifespan * 0.2f, lifespan * 0.4f));
@@ -107,16 +117,12 @@ public class CreatureController : MonoBehaviour
 
                     timer.OnTick -= DieAndBirthSelf;
                     timer.OnTick += Hatch;
-                    
-                    spriteRenderer.sprite = eggSprite;
 
                     return;
                 }
                 
                 timer.SetPeriod(lifespan);
                 timer.Start();
-
-                spriteRenderer.sprite = eggSprite;
 
                 timer.OnTick += EndDynasty;
                 timer.OnTick -= DieAndBirthSelf;
@@ -125,6 +131,8 @@ public class CreatureController : MonoBehaviour
 
             case CreatureState.Alive:
                 Debug.Log(gameObject.name + " birthed itself after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
+
+                animator.SetBool(hatch, true);
 
                 if (!isPlayer)
                 {
@@ -139,8 +147,6 @@ public class CreatureController : MonoBehaviour
                     timer.Start();
                 }
 
-                spriteRenderer.sprite = livingSprite;
-
                 timer.OnTick += DieAndBirthSelf;
                 timer.OnTick -= EndDynasty;
 
@@ -150,8 +156,6 @@ public class CreatureController : MonoBehaviour
                 Debug.Log(gameObject.name + " ended its dynasty after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
 
                 timer.Stop();
-
-                spriteRenderer.sprite = eggSprite;
 
                 if (!isPlayer)
                     return;
@@ -210,6 +214,13 @@ public class CreatureController : MonoBehaviour
 #endif
 
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+    }
+
+    void InitializeAnimator()
+    {
+        animator.SetBool(hatch, true);
+        animator.SetBool(die, false);
+        animator.SetFloat(deathType, Mathf.Floor(Random.Range(0, 3)));
     }
 
     #endregion

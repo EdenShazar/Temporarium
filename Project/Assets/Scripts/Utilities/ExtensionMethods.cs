@@ -76,3 +76,20 @@ public static class Vector2ExtensionMethods
     }
 }
 
+public static class AnimatorStateInfoExtensionMethods
+{
+    public static float NormalizedTimeLooped(this AnimatorStateInfo info)
+    {
+        return info.normalizedTime % 1;
+    }
+
+    public static float RealTime(this AnimatorStateInfo info)
+    {
+        return info.normalizedTime * info.length;
+    }
+
+    public static float RealTimeLooped(this AnimatorStateInfo info)
+    {
+        return info.NormalizedTimeLooped() * info.length;
+    }
+}
