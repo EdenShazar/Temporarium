@@ -3,10 +3,12 @@
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public static PlayerController player; 
 
     void Awake()
     {
         EnsureSingleton();
+        player = FindObjectOfType<PlayerController>();
     }
 
     void EnsureSingleton()
