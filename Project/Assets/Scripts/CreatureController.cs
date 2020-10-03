@@ -43,7 +43,7 @@ public class CreatureController : MonoBehaviour
     {
         UpdateScale();
 
-        if (state == CreatureState.Egg && isPlayer && Input.GetKeyDown(KeyCode.Alpha1))
+        if (state == CreatureState.Egg && isPlayer && Input.GetMouseButtonDown(0))
             SetState(CreatureState.Alive);
 
         if (state == CreatureState.Alive)
