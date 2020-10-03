@@ -1,6 +1,4 @@
 ﻿using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -10,22 +8,28 @@ public class CameraController : MonoBehaviour
     GameObject player;
     ScaleManager sm;
     
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SetPlayer();
         sm = FindObjectOfType<ScaleManager>();
         brain = FindObjectOfType<CinemachineBrain>();
         cam = (CinemachineVirtualCamera)brain.ActiveVirtualCamera;
+        
+        SetOrthographicSize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        cam.m_Lens.OrthographicSize = sm.GetTargetCameraScale(player.transform.position);
+        SetOrthographicSize();
     }
 
     public void SetPlayer() {
         player = FindObjectOfType<PlayerController>().gameObject;
+    }
+
+    void SetOrthographicSize()
+    {
+        cam.m_Lens.OrthographicSize = sm.GetTargetCameraScale(player.transform.position);
     }
 }
