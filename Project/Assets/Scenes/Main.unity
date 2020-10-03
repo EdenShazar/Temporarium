@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184290738}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0, z: 0}
+  m_LocalPosition: {x: -23, y: 14.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -236,8 +236,6 @@ MonoBehaviour:
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
-  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
-  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!1 &272832087
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +369,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276701781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0, z: -10}
+  m_LocalPosition: {x: -23, y: 14.3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1245794048}
@@ -421,13 +419,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleMarkers:
   - yPosition: -20
-    playerScale: 3
+    playerScale: 4
     cameraScale: 10
   - yPosition: 0
     playerScale: 2
     cameraScale: 7
   - yPosition: 20
-    playerScale: 1
+    playerScale: 0.2
     cameraScale: 1
 --- !u!4 &475725854
 Transform:
@@ -554,7 +552,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063964854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0, z: -10}
+  m_LocalPosition: {x: -23, y: 14.3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -863,8 +861,6 @@ MonoBehaviour:
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
-  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
-  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!1 &1676031883
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,8 +961,6 @@ MonoBehaviour:
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
-  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
-  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!1 &1796750929
 GameObject:
   m_ObjectHideFlags: 0
