@@ -18,8 +18,11 @@ public class CreatureController : MonoBehaviour
 
     float nonPlayerMovementSeed;
 
+    ScaleManager sm; 
+
     void Start()
     {
+        sm = FindObjectOfType<ScaleManager>();
         SetState(CreatureState.Alive);
 
         isPlayer = TryGetComponent(out PlayerController playerController);
@@ -31,6 +34,8 @@ public class CreatureController : MonoBehaviour
 
     void Update()
     {
+        UpdateScale();
+
         if (state == CreatureState.Egg && isPlayer && Input.GetKeyDown(KeyCode.Alpha1))
             SetState(CreatureState.Alive);
 
@@ -43,6 +48,11 @@ public class CreatureController : MonoBehaviour
             minDirection = maxDirection;
             maxDirection = temp;
         }
+    }
+
+    void UpdateScale() {
+        float targetScale = sm.GetTargetScale(transform.position);
+        transform.localScale = new Vector3(targetScale, targetScale, 1f);
     }
 
     void SetState(CreatureState newState)

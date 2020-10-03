@@ -9,7 +9,7 @@ public class ScaleManager : MonoBehaviour
     public struct ScaleMarker
     {
         public float yPosition;
-        public float playerScale;
+        public float creatureScale;
         public float cameraScale;
     }
 
@@ -33,7 +33,7 @@ public class ScaleManager : MonoBehaviour
         int next = GetNextScaleMarkerIndex(yPos);
         int prev = next - 1;
         float progress = Mathf.InverseLerp(scaleMarkers[prev].yPosition, scaleMarkers[next].yPosition, yPos);
-        return Mathf.Lerp(scaleMarkers[prev].playerScale, scaleMarkers[next].playerScale, progress);
+        return Mathf.Lerp(scaleMarkers[prev].creatureScale, scaleMarkers[next].creatureScale, progress);
     }
 
     int GetNextScaleMarkerIndex(float screenYPosition)
