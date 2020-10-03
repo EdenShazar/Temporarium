@@ -35,8 +35,8 @@ public class RadarController : MonoBehaviour
         ellipse.theta = theta;
     }
 
- 
-        bool IsPointInEllipse(Vector3 pnt) {
+    // https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
+    bool IsPointInEllipse(Vector3 pnt) {
         return
             (((pnt.x - transform.position.x) / (rx * rx)) +
             ((pnt.y - transform.position.y) / (ry * ry))) <= 1;
