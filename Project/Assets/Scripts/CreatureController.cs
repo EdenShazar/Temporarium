@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class CreatureController : MonoBehaviour
@@ -21,7 +22,11 @@ public class CreatureController : MonoBehaviour
     PlayerController playerController;
     bool isPlayer;
 
+    #region Non-player fields
+
     float nonPlayerMovementSeed;
+
+    #endregion
 
     ScaleManager sm; 
 
@@ -43,11 +48,18 @@ public class CreatureController : MonoBehaviour
     {
         UpdateScale();
 
-        if (state == CreatureState.Egg && isPlayer && Input.GetMouseButtonDown(0))
-            SetState(CreatureState.Alive);
-
-        if (state == CreatureState.Alive)
-            Move();
+        switch (state)
+        {
+            case CreatureState.Egg:
+                EggBehavior();
+                break;
+            case CreatureState.Alive:
+                AliveBehavior();
+                break;
+            case CreatureState.Extinct:
+                ExtinctBehavior();
+                break;
+        }
 
         if (minDirection > maxDirection)
         {
@@ -57,7 +69,24 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-    void UpdateScale() {
+    void EggBehavior()
+    {
+        if (isPlayer && Input.GetMouseButtonDown(0))
+            SetState(CreatureState.Alive);
+    }
+
+    void AliveBehavior()
+    {
+        Move();
+    }
+
+    void ExtinctBehavior()
+    {
+
+    }
+
+    void UpdateScale()
+    {
         float targetScale = sm.GetTargetScale(transform.position);
         transform.localScale = new Vector3(targetScale, targetScale, 1f);
     }
@@ -70,39 +99,65 @@ public class CreatureController : MonoBehaviour
         {
             case CreatureState.Egg:
                 Debug.Log(gameObject.name + " died after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
+
+                if (!isPlayer)
+                {
+                    timer.SetPeriod(Random.Range(lifespan * 0.2f, lifespan * 0.4f));
+                    timer.Start();
+
+                    timer.OnTick -= DieAndBirthSelf;
+                    timer.OnTick += Hatch;
+                    
+                    spriteRenderer.sprite = eggSprite;
+
+                    return;
+                }
                 
                 timer.SetPeriod(lifespan);
                 timer.Start();
 
+                spriteRenderer.sprite = eggSprite;
+
                 timer.OnTick += EndDynasty;
                 timer.OnTick -= DieAndBirthSelf;
-
-                spriteRenderer.sprite = eggSprite;
 
                 return;
 
             case CreatureState.Alive:
                 Debug.Log(gameObject.name + " birthed itself after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
 
-                timer.SetPeriod(lifespan - timer.ElapsedTime);
-                timer.Start();
+                if (!isPlayer)
+                {
+                    timer.SetPeriod(Random.Range(lifespan * 0.7f, lifespan * 1.3f));
+                    timer.Start();
+
+                    timer.OnTick -= Hatch;
+                }
+                else
+                {
+                    timer.SetPeriod(lifespan - timer.ElapsedTime);
+                    timer.Start();
+                }
+
+                spriteRenderer.sprite = livingSprite;
 
                 timer.OnTick += DieAndBirthSelf;
                 timer.OnTick -= EndDynasty;
 
-                spriteRenderer.sprite = livingSprite;
-
                 return;
 
             case CreatureState.Extinct:
-                Debug.Log(gameObject.name + " ended its dynasty " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
+                Debug.Log(gameObject.name + " ended its dynasty after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
 
                 timer.Stop();
 
+                spriteRenderer.sprite = eggSprite;
+
+                if (!isPlayer)
+                    return;
+
                 timer.OnTick -= DieAndBirthSelf;
                 timer.OnTick -= EndDynasty;
-
-                spriteRenderer.sprite = eggSprite;
 
                 return;
         }
@@ -118,6 +173,11 @@ public class CreatureController : MonoBehaviour
         SetState(CreatureState.Extinct);
     }
 
+    void Hatch()
+    {
+        SetState(CreatureState.Alive);
+    }
+
     void Move()
     {
         if (playerController != null)
@@ -125,6 +185,8 @@ public class CreatureController : MonoBehaviour
         else
             transform.Translate(GetRandomMoveDirection() * movementSpeed * Time.deltaTime);
     }
+
+    #region Helper functions
 
     Vector2 GetPlayerMoveDirection()
     {
@@ -150,6 +212,10 @@ public class CreatureController : MonoBehaviour
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
+    #endregion
+
+    #region Gizmos
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
@@ -160,4 +226,6 @@ public class CreatureController : MonoBehaviour
         Vector3 maxVector = new Vector3(Mathf.Cos(maxDirection), Mathf.Sin(maxDirection), 0);
         Gizmos.DrawLine(transform.position, transform.position + maxVector);
     }
+
+    #endregion
 }
