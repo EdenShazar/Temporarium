@@ -8,8 +8,9 @@ public class RadarController : MonoBehaviour
     public float ry = 1f;
     public float theta = 0f;
     Ellipse ellipse;
-    public bool isPlayerInRange = false; 
 
+    // for debugging TODO: remove
+    public bool isPlayerInRange = false; 
     public float angleToPlayer = 0f; 
 
     // Start is called before the first frame update
@@ -21,24 +22,24 @@ public class RadarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        angleToPlayer = Vector2.Angle(transform.position, GameManager.player.transform.position);
+        angleToPlayer = (GameManager.player.transform.position - transform.position).ToVector2().GetAngleDeg();
         UpdateEllipse();
         ellipse.Draw();
         isPlayerInRange = IsPointInEllipse(GameManager.player.transform.position);
     }
 
     void UpdateEllipse() {
-        ellipse.h = transform.position.x;
-        ellipse.k = transform.position.y;
-        ellipse.a = rx;
-        ellipse.b = ry;
+        ellipse.centerX = 0f; //line rendrer is local space
+        ellipse.centerY = 0f;
+        ellipse.rX = rx;
+        ellipse.rY = ry;
         ellipse.theta = theta;
     }
 
     // https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
     bool IsPointInEllipse(Vector3 pnt) {
         return
-            (((pnt.x - transform.position.x) / (rx * rx)) +
-            ((pnt.y - transform.position.y) / (ry * ry))) <= 1;
+            ((Mathf.Pow(pnt.x - (ellipse.centerX + transform.position.x), 2)) / (ellipse.rX * ellipse.rX)) +
+            ((Mathf.Pow(pnt.y - (ellipse.centerY + transform.position.y), 2)) / (ellipse.rY * ellipse.rY)) <= 1;
     }
 }

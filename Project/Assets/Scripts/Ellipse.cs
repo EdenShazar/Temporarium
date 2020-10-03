@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// adjustment of code from:
+// for sanity & debugging, adjustment of code from:
 // https://answers.unity.com/questions/631201/draw-an-ellipse-in-unity-3d.html
 
 [RequireComponent(typeof(LineRenderer))]
 public class Ellipse : MonoBehaviour
 {
 
-    public float a = 5;
-    public float b = 3;
-    public float h = 1;
-    public float k = 1;
+    public float rX = 5;
+    public float rY = 3;
+    public float centerX = 1;
+    public float centerY = 1;
     public float theta = 0f;
     public int resolution = 30;
 
@@ -24,10 +24,12 @@ public class Ellipse : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         lr.useWorldSpace = false;
         lr.positionCount = resolution + 1;
+        lr.startWidth = 0.1f;
+        lr.endWidth = 0.1f;
     }
 
     public void Draw() {
-        positions = CreateEllipse(a, b, h, k, theta, resolution);
+        positions = CreateEllipse(rX, rY, centerX, centerY, theta, resolution);
         for (int i = 0; i <= resolution; i++)
         {
             lr.SetPosition(i, positions[i]);
