@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class CreatureController : MonoBehaviour
 {
     public enum CreatureState { Alive, Egg, Extinct }
@@ -9,9 +10,13 @@ public class CreatureController : MonoBehaviour
     [SerializeField] [Min(0.01f)] float franticness = 1f;
     [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float minDirection = -Mathf.PI;
     [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float maxDirection = Mathf.PI;
+    [SerializeField] Sprite livingSprite;
+    [SerializeField] Sprite eggSprite;
 
     CreatureState state;
     readonly Timer timer = new Timer();
+
+    SpriteRenderer spriteRenderer;
 
     PlayerController playerController;
     bool isPlayer;
@@ -20,13 +25,15 @@ public class CreatureController : MonoBehaviour
 
     void Start()
     {
-        SetState(CreatureState.Alive);
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         isPlayer = TryGetComponent(out PlayerController playerController);
         if (isPlayer)
             this.playerController = playerController;
             
         nonPlayerMovementSeed = Random.Range(0, 100);
+        
+        SetState(CreatureState.Alive);
     }
 
     void Update()
@@ -59,6 +66,9 @@ public class CreatureController : MonoBehaviour
 
                 timer.OnTick += EndDynasty;
                 timer.OnTick -= DieAndBirthSelf;
+
+                spriteRenderer.sprite = eggSprite;
+
                 return;
 
             case CreatureState.Alive:
@@ -69,6 +79,9 @@ public class CreatureController : MonoBehaviour
 
                 timer.OnTick += DieAndBirthSelf;
                 timer.OnTick -= EndDynasty;
+
+                spriteRenderer.sprite = livingSprite;
+
                 return;
 
             case CreatureState.Extinct:
@@ -78,6 +91,9 @@ public class CreatureController : MonoBehaviour
 
                 timer.OnTick -= DieAndBirthSelf;
                 timer.OnTick -= EndDynasty;
+
+                spriteRenderer.sprite = eggSprite;
+
                 return;
         }
     }
@@ -102,7 +118,8 @@ public class CreatureController : MonoBehaviour
 
     Vector2 GetPlayerMoveDirection()
     {
-        float angle = Mathf.Clamp(playerController.MoveAngle, minDirection, maxDirection);
+        float angle = playerController.MoveAngle;
+        angle = angle.ClampAngleRad(minDirection, maxDirection);
 
 #if UNITY_EDITOR
         Debug.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0));

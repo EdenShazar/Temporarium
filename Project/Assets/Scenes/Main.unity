@@ -236,6 +236,8 @@ MonoBehaviour:
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
+  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
+  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!1 &272832087
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,8 +390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e01bd3a7f528bef469476d9e8a019ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerYProgress: 0
-  orthographicSize: 0
 --- !u!1 &475725852
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,15 +420,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleMarkers:
-  - yPosition: 20
-    playerScale: 1
-    cameraScale: 1
-  - yPosition: 0
-    playerScale: 2
-    cameraScale: 7
   - yPosition: -20
     playerScale: 3
     cameraScale: 10
+  - yPosition: 0
+    playerScale: 2
+    cameraScale: 7
+  - yPosition: 20
+    playerScale: 1
+    cameraScale: 1
 --- !u!4 &475725854
 Transform:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ Transform:
   - {fileID: 1405813285}
   - {fileID: 272832088}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1063964854
 GameObject:
@@ -863,6 +863,8 @@ MonoBehaviour:
   franticness: 1
   minDirection: -0.41
   maxDirection: -1.7
+  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
+  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!1 &1676031883
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +948,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1676031886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676031883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a89fe5d486641649b29ab33a967efe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifespan: 10
+  movementSpeed: 1
+  franticness: 1
+  minDirection: -0.41
+  maxDirection: -1.7
+  livingSprite: {fileID: 7881166437498641139, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
+  eggSprite: {fileID: 1774670244066423689, guid: ba31384bebfe67d4aa9314e6bae0c69d, type: 3}
 --- !u!1 &1796750929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,23 +1049,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1676031886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676031883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a89fe5d486641649b29ab33a967efe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifespan: 10
-  movementSpeed: 1
-  franticness: 1
-  minDirection: -0.41
-  maxDirection: -1.7
 --- !u!1 &2025269398
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,5 +1090,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
