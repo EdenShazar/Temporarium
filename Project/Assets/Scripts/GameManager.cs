@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
             
             return player;
         }
+
+        set => player = value;
     }
 
 #pragma warning disable CS0649

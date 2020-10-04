@@ -3,27 +3,31 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    CinemachineVirtualCamera cam;
+    new static CinemachineVirtualCamera camera;
     CinemachineBrain brain;
-    ScaleManager sm;
+    ScaleManager scaleManager;
     
     void Start()
     {
-        sm = FindObjectOfType<ScaleManager>();
+        scaleManager = FindObjectOfType<ScaleManager>();
         brain = FindObjectOfType<CinemachineBrain>();
-        cam = (CinemachineVirtualCamera)brain.ActiveVirtualCamera;
+        camera = (CinemachineVirtualCamera)brain.ActiveVirtualCamera;
 
         SetOrthographicSize();
     }
 
-    // Update is called once per frame
     void Update()
     {
         SetOrthographicSize();
     }
 
+    public static void SetFollowTarget(Transform target)
+    {
+        camera.Follow = target;
+    }
+
     void SetOrthographicSize()
     {
-        cam.m_Lens.OrthographicSize = sm.GetTargetCameraScale(GameManager.Player.transform.position);
+        camera.m_Lens.OrthographicSize = scaleManager.GetTargetCameraScale(GameManager.Player.transform.position);
     }
 }

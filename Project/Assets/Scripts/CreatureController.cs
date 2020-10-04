@@ -138,6 +138,8 @@ public class CreatureController : MonoBehaviour
         egg.GetComponent<CreatureController>().ActivateInstance();
         egg.transform.position = spitPoint.position;
         egg.transform.rotation = Quaternion.identity;
+        if (isPlayer)
+            CameraController.SetFollowTarget(egg.transform);
 
         // TODO: Add trajectory
     }
