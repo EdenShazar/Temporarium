@@ -10,7 +10,9 @@ public static class StateEventManager
     // Any type of built-in or custom delegate may be used as an event handler.
 
     // Creature layer
-    public static event Action OnSpitEgg;
+    public static event Action<int> OnFinishedHatching;
+    public static event Action<int> OnLayEgg;
+    public static event Action<int> OnDeath;
 
     #endregion
 
@@ -30,7 +32,7 @@ public static class StateEventManager
             { "Creature",
                 new List<string>
                 {
-                        
+                    nameof(OnDeath)
                 }
             }
         };
@@ -45,7 +47,7 @@ public static class StateEventManager
             { "Creature",
                 new List<string>
                 {
-                        
+                    nameof(OnFinishedHatching)
                 }
             }
         };
@@ -60,7 +62,7 @@ public static class StateEventManager
             { "Creature",
                 new List<string>
                 {
-                    nameof(OnSpitEgg)
+                    nameof(OnLayEgg)
                 }
             }
         };
@@ -84,7 +86,7 @@ public static class StateEventManager
 
     #endregion
 
-    public static void Raise(string eventName)
+    public static void Raise(string eventName, int gameObjectID)
     {
         if (eventName == "")
             return;
@@ -93,7 +95,7 @@ public static class StateEventManager
             throw new Exception("No event named " + eventName + " exists.");
 
         var eventDelegate = (MulticastDelegate)eventFields[eventName].GetValue(null);
-        eventDelegate?.DynamicInvoke();
+        eventDelegate?.DynamicInvoke(gameObjectID);
     }
 
     #region Implementation details

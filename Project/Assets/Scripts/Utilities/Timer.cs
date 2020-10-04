@@ -38,6 +38,7 @@ public class Timer
     public void Stop()
     {
         enabled = false;
+        ElapsedTime = 0;
     }
 
     IEnumerator Count()

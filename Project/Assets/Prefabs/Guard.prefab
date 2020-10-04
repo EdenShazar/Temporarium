@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 840840333166929153}
   - component: {fileID: 840840333166929152}
   m_Layer: 0
-  m_Name: Guard 1
+  m_Name: Guard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,8 +242,8 @@ SpriteRenderer:
   m_SortingLayerID: 1606710979
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 08c8fcc13703bec4682a50a35a84d057, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -7214062589465078989, guid: e7e133f70dafc544cbfc11ddd5428c13, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

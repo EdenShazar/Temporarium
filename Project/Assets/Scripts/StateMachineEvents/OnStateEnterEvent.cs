@@ -21,7 +21,7 @@ namespace GoodBoy.StateEvents
             if (raiseOnTransitionEnd && !transitionIsInstant)
                 return;
 
-            StateEventManager.Raise(eventName);
+            StateEventManager.Raise(eventName, animator.gameObject.GetInstanceID());
             eventRaised = true;
 
             if (stateInfo.shortNameHash == Animator.StringToHash("Idle"))
@@ -33,7 +33,7 @@ namespace GoodBoy.StateEvents
             if (!raiseOnTransitionEnd || eventRaised || animator.IsInTransition(layerIndex))
                 return;
 
-            StateEventManager.Raise(eventName);
+            StateEventManager.Raise(eventName, animator.gameObject.GetInstanceID());
             eventRaised = true;
 
             if (stateInfo.shortNameHash == Animator.StringToHash("Idle"))

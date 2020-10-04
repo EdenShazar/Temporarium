@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public static Camera camera;
+    new public static Camera camera;
     
     static PlayerController player;
     public static PlayerController Player
@@ -18,10 +18,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+#pragma warning disable CS0649
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject creaturePrefab;
     [SerializeField] GameObject bodyPrefab;
     [SerializeField] Transform creatureParent;
+#pragma warning restore CS0649
 
     static GameObject[] playerInstances = new GameObject[Constants.maxPlayerInstances];
     static GameObject[] creatureInstances = new GameObject[Constants.maxCreatureInstances];
@@ -43,11 +45,6 @@ public class GameManager : MonoBehaviour
         noContactFiler.NoFilter();
 
         PopulateInstanceArrays();
-    }
-
-    void Start()
-    {
-    
     }
 
     void EnsureSingleton()
@@ -87,22 +84,18 @@ public class GameManager : MonoBehaviour
 
     void PopulateInstanceArrays()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerController>(includeInactive: true);
         playerInstances[0] = player.gameObject;
-        playerInstances[0].SetActive(true);
+        playerInstances[0].GetComponent<CreatureController>().ActivateInstance();
 
         for (int i = 1; i < Constants.maxPlayerInstances; i++)
-        {
             playerInstances[i] = Instantiate(playerPrefab, parent: creatureParent);
-            playerInstances[i].GetComponent<PlayerController>().isActivePlayer = false;
-            playerInstances[i].SetActive(false);
-        }
 
         for (int i = 0; i < Constants.maxCreatureInstances; i++)
         {
             creatureInstances[i] = InitializeCreatureInstance();
-            if (i > Constants.maxCreatureInstances / 2)
-                creatureInstances[i].SetActive(false);
+            if (i < Constants.maxCreatureInstances / 2)
+                creatureInstances[i].GetComponent<CreatureController>().ActivateInstance();
         }
 
         for (int i = 0; i < Constants.maxBodyInstances; i++)
@@ -127,8 +120,6 @@ public class GameManager : MonoBehaviour
 
         instance = FindFarthestObjectFromPlayer(playerInstances);
 
-        instance.SetActive(true);
-
         return instance;
     }
 
@@ -147,8 +138,6 @@ public class GameManager : MonoBehaviour
 
         instance = FindFarthestObjectFromPlayer(creatureInstances);
 
-        instance.SetActive(true);
-
         return instance;
     }
 
@@ -166,8 +155,6 @@ public class GameManager : MonoBehaviour
             return null;
 
         instance = FindFarthestObjectFromPlayer(bodyInstances);
-        
-        instance.SetActive(true);
 
         return instance;
     }
