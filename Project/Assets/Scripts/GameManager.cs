@@ -115,10 +115,11 @@ public class GameManager : MonoBehaviour
             instance = playerInstances.FirstOrDefault(go => !go.activeSelf);
         }
 
-        if (instance == null)
+        if (instance == null && !forced)
             return null;
 
-        instance = FindFarthestObjectFromPlayer(playerInstances);
+        if (instance == null)
+            instance = FindFarthestObjectFromPlayer(playerInstances);
 
         return instance;
     }
@@ -133,10 +134,11 @@ public class GameManager : MonoBehaviour
             instance = creatureInstances.FirstOrDefault(go => !go.activeSelf);
         }
 
-        if (instance == null)
+        if (instance == null && !forced)
             return null;
 
-        instance = FindFarthestObjectFromPlayer(creatureInstances);
+        if (instance == null)
+            instance = FindFarthestObjectFromPlayer(creatureInstances);
 
         return instance;
     }
@@ -154,7 +156,8 @@ public class GameManager : MonoBehaviour
         if (instance == null && !forced)
             return null;
 
-        instance = FindFarthestObjectFromPlayer(bodyInstances);
+        if (instance == null)
+            instance = FindFarthestObjectFromPlayer(bodyInstances);
 
         return instance;
     }
