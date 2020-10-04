@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eaedbe8ac5d04643ab575e6d9e77ce1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActivePlayer: 0
 --- !u!1001 &1132774591777567115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2178560850597934434, guid: ce1b592e093adc749897195261fa5fa8, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2178560850597934436, guid: ce1b592e093adc749897195261fa5fa8, type: 3}
       propertyPath: m_LocalPosition.x

@@ -36,7 +36,7 @@ namespace GoodBoy.StateEvents
             if (raiseOnAnimationEndOnly && !transitioningOnAnimationEnd)
             return;
 
-            StateEventManager.Raise(eventName);
+            StateEventManager.Raise(eventName, animator.gameObject.GetInstanceID());
             eventRaised = true;
         }
 
@@ -48,7 +48,7 @@ namespace GoodBoy.StateEvents
             if (raiseOnAnimationEndOnly && !transitioningOnAnimationEnd)
                 return;
 
-            StateEventManager.Raise(eventName);
+            StateEventManager.Raise(eventName, animator.gameObject.GetInstanceID());
         }
 
         bool IsTransitioningFromState(Animator animator, int layerIndex)

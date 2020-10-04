@@ -1,288 +1,330 @@
-﻿using UnityEngine;
+﻿//using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Animator))]
-public class CreatureController : MonoBehaviour
-{
-    public enum CreatureState { Alive, Egg, Extinct }
+//[RequireComponent(typeof(SpriteRenderer))]
+//[RequireComponent(typeof(Animator))]
+//public class CreatureController : MonoBehaviour
+//{
+//    public enum CreatureState { Alive, Egg }//, Dead }
 
-    [SerializeField] [Min(1)] float lifespan = 10;
-    [SerializeField] [Min(0.01f)] float movementSpeed = 1f;
-    [SerializeField] [Min(0.01f)] float franticness = 1f;
-    [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float minDirection = -Mathf.PI;
-    [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float maxDirection = Mathf.PI;
-    [SerializeField] Sprite[] orderedDeathSprites;
+//    #region Inspector fields
 
-    CreatureState state;
-    readonly Timer timer = new Timer();
+//    [SerializeField] [Min(1)] float lifespan = 10;
+//    [SerializeField] [Min(0.01f)] float movementSpeed = 1f;
+//    [SerializeField] [Min(0.01f)] float franticness = 1f;
+//    [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float minDirection = -Mathf.PI;
+//    [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float maxDirection = Mathf.PI;
+//    [SerializeField] Sprite[] orderedDeathSprites;
 
-    Animator animator;
+//    #endregion
 
-    PlayerController playerController;
-    bool isPlayer;
+//    #region Reference fields
 
-    Collider2D collider;
+//    Animator animator;
+//    PlayerController playerController;
+//    new Collider2D collider;
+//    ScaleManager sm;
+//    Transform spitPoint;
 
-    ScaleManager sm;
-    Transform spitPoint;
+//    #endregion
 
-    #region Non-player fields
+//    CreatureState state;
+//    readonly Timer lifespanTimer = new Timer();
+//    readonly Timer extinctionTimer = new Timer();
 
-    float nonPlayerMovementSeed;
+//    bool isPlayer;
 
-    #endregion
+//    #region Non-player fields
 
-    #region Animator hashes
+//    float nonPlayerMovementSeed;
+//    readonly Timer naturalHatchTimer = new Timer();
 
-    readonly int hatch = Animator.StringToHash("Hatch");
-    readonly int die = Animator.StringToHash("Die");
-    readonly int deathType = Animator.StringToHash("Death type");
+//    #endregion
 
-    #endregion
+//    #region Animator hashes
 
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
-        sm = FindObjectOfType<ScaleManager>();
+//    readonly int hatch = Animator.StringToHash("Hatch");
+//    readonly int die = Animator.StringToHash("Die");
+//    readonly int deathType = Animator.StringToHash("Death type");
 
-        isPlayer = TryGetComponent(out PlayerController playerController);
-        if (isPlayer)
-            this.playerController = playerController;
-            
-        nonPlayerMovementSeed = Random.Range(0, 100);
+//    #endregion
 
-        InitializeAnimator();
+//    void Start()
+//    {
+//        Initialize();
+//    }
 
-        spitPoint = GetComponentInChildren<Transform>();
+//    void Update()
+//    {
+//        UpdateScale();
 
-        if (minDirection > maxDirection)
-        {
-            float temp = minDirection;
-            minDirection = maxDirection;
-            maxDirection = temp;
-        }
+//        switch (state)
+//        {
+//            case CreatureState.Egg:
+//                EggBehavior();
+//                break;
+//            case CreatureState.Alive:
+//                AliveBehavior();
+//                break;
+//        }
+//    }
+//    void OnDestroy()
+//    {
+//        StateEventManager.OnLayEgg -= SpitEgg;
+//        StateEventManager.OnDeath -= TurnIntoDeadBody;
+//        lifespanTimer.OnTick -= DieAndBirthSelf;
+//        naturalHatchTimer.OnTick -= Hatch;
+//        //extinctionTimer.OnTick += TurnIntoDeadBody;
+//    }
 
-        SetState(CreatureState.Alive);
+//    void EggBehavior()
+//    {
+//        if (isPlayer && Input.GetMouseButtonDown(0))
+//            SetState(CreatureState.Alive);
 
-        StateEventManager.OnSpitEgg += SpitEgg;
-    }
+//        // Non-players use timer to hatch
+//    }
 
-    void Update()
-    {
-        UpdateScale();
+//    void AliveBehavior()
+//    {
+//        Move();
+//    }
 
-        switch (state)
-        {
-            case CreatureState.Egg:
-                EggBehavior();
-                break;
-            case CreatureState.Alive:
-                AliveBehavior();
-                break;
-        }
-    }
-    void OnDestroy()
-    {
-        StateEventManager.OnSpitEgg -= SpitEgg;
-    }
+//    void UpdateScale()
+//    {
+//        float targetScale = sm.GetTargetScale(transform.position);
+//        transform.localScale = new Vector3(targetScale, targetScale, 1f);
+//    }
 
-    void ResetValues()
-    {
-        InitializeAnimator();
-    }
+//    void SetState(CreatureState newState)
+//    {
+//        state = newState;
 
-    void Disable()
-    {
-        GameManager.FreeInstance(gameObject);
-        
-        GameObject body = GameManager.GetFreeBodyInstance();
-        if (body != null)
-        {
-            body.transform.position = transform.position;
-            body.GetComponent<SpriteRenderer>().sprite = orderedDeathSprites[(int)animator.GetFloat(deathType)];
-        }
+//        switch (state)
+//        {
+//            case CreatureState.Egg:
+//                SwitchToEgg();
+//                return;
 
-        enabled = false;
-        isPlayer = false;
-        StateEventManager.OnSpitEgg -= SpitEgg;
-    }
+//            case CreatureState.Alive:
+//                SwitchToAlive();
+//                return;
 
-    void EggBehavior()
-    {
-        if (isPlayer && Input.GetMouseButtonDown(0))
-            SetState(CreatureState.Alive);
-    }
+//            //case CreatureState.Dead:
+//            //    SwitchToDead();
+//            //    return;
+//        }
+//    }
 
-    void AliveBehavior()
-    {
-        Move();
-    }
+//    void DieAndBirthSelf()
+//    {
+//        animator.SetBool(die, true);
+//        //SetState(CreatureState.Dead);
+//    }
 
-    void UpdateScale()
-    {
-        float targetScale = sm.GetTargetScale(transform.position);
-        transform.localScale = new Vector3(targetScale, targetScale, 1f);
-    }
+//    //void EndDynasty()
+//    //{
+//    //    SetState(CreatureState.Dead);
+//    //}
 
-    void SetState(CreatureState newState)
-    {
-        state = newState;
+//    void Hatch()
+//    {
+//        SetState(CreatureState.Alive);
+//    }
 
-        switch (state)
-        {
-            case CreatureState.Egg:
-                Debug.Log(gameObject.name + " died after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
+//    void Move()
+//    {
+//        transform.Translate(GetMoveDirection() * movementSpeed * Time.deltaTime);
+//    }
 
-                animator.SetBool(die, true);
+//    void SpitEgg()
+//    {
+//        GameObject newEgg = isPlayer ? GameManager.GetFreePlayerInstance(forced: true) : GameManager.GetFreeCreatureInstance();
 
-                if (!isPlayer)
-                {
-                    timer.SetPeriod(Random.Range(lifespan * 0.2f, lifespan * 1.4f));
-                    timer.Start();
+//        if (newEgg == null)
+//            return;
 
-                    timer.OnTick -= DieAndBirthSelf;
-                    timer.OnTick += Hatch;
+//        newEgg.SetActive(true);
+//        newEgg.transform.position = spitPoint.position;
+//        newEgg.transform.rotation = Quaternion.identity;
 
-                    return;
-                }
-                
-                timer.SetPeriod(lifespan);
-                timer.Start();
+//        newEgg.GetComponent<CreatureController>().ReinitializeInstance();
 
-                timer.OnTick += EndDynasty;
-                timer.OnTick -= DieAndBirthSelf;
+//        // TODO: Add trajectory
+//    }
 
-                return;
+//    void TurnIntoDeadBody()
+//    {
+//        ResetValues();
+//        GameManager.FreeInstance(gameObject);
 
-            case CreatureState.Alive:
-                Debug.Log(gameObject.name + " birthed itself after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
+//        // Replace with body if and instance is available
+//        GameObject body = GameManager.GetFreeBodyInstance();
+//        if (body != null)
+//        {
+//            body.transform.position = transform.position;
+//            body.GetComponent<SpriteRenderer>().sprite = orderedDeathSprites[(int)animator.GetFloat(deathType)];
+//        }
+//    }
 
-                animator.SetBool(hatch, true);
+//    #region State switch methods
 
-                if (!isPlayer)
-                {
-                    timer.SetPeriod(Random.Range(lifespan * 0.5f, lifespan * 3f));
-                    timer.Start();
+//    void SwitchToEgg()
+//    {
+//        if (!isPlayer)
+//        {
+//            naturalHatchTimer.Start();
 
-                    timer.OnTick -= Hatch;
-                }
-                else
-                {
-                    timer.SetPeriod(lifespan - timer.ElapsedTime);
-                    timer.Start();
-                }
+//            // Ensure other timers are not interfering
+//            lifespanTimer.Stop();
+//            extinctionTimer.Stop();
 
-                timer.OnTick += DieAndBirthSelf;
-                timer.OnTick -= EndDynasty;
+//            return;
+//        }
 
-                return;
+//        extinctionTimer.Start();
 
-            case CreatureState.Extinct:
-                Debug.Log(gameObject.name + " ended its dynasty after " + System.Math.Round(timer.ElapsedTime, 2) + " seconds!");
+//        // Ensure other timers are not interfering
+//        lifespanTimer.Stop();
+//        naturalHatchTimer.Stop();
+//    }
 
-                timer.Stop();
+//    void SwitchToAlive()
+//    {
+//        Debug.Log(gameObject.name + " birthed itself after " + System.Math.Round(isPlayer ? extinctionTimer.ElapsedTime : naturalHatchTimer.ElapsedTime, 2) + " seconds!");
 
-                if (!isPlayer)
-                    return;
+//        animator.SetBool(hatch, true);
 
-                timer.OnTick -= DieAndBirthSelf;
-                timer.OnTick -= EndDynasty;
+//        lifespanTimer.Start();
 
-                return;
-        }
-    }
+//        // Ensure other timers are not interfering
+//        naturalHatchTimer.Stop();
+//        extinctionTimer.Stop();
+//    }
 
-    void DieAndBirthSelf()
-    {
-        SetState(CreatureState.Egg);
-    }
+//    //void SwitchToDead()
+//    //{
+//    //    Debug.Log(gameObject.name + " died after " + System.Math.Round(extinctionTimer.ElapsedTime, 2) + " seconds!");
 
-    void EndDynasty()
-    {
-        SetState(CreatureState.Extinct);
-    }
+//    //    animator.SetBool(die, true);
+//    //}
 
-    void Hatch()
-    {
-        SetState(CreatureState.Alive);
-    }
+//    #endregion
 
-    void Move()
-    {
-        transform.Translate(GetMoveDirection() * movementSpeed * Time.deltaTime);
-    }
+//    #region Initialization methods
 
-    void SpitEgg()
-    {
-        GameObject newEgg = isPlayer ? GameManager.GetFreePlayerInstance(forced: true) : GameManager.GetFreeCreatureInstance();
+//    public void Initialize(bool active = false)
+//    {
+//        // References
+//        animator = GetComponent<Animator>();
+//        collider = GetComponent<Collider2D>();
+//        sm = FindObjectOfType<ScaleManager>();
+//        spitPoint = GetComponentInChildren<Transform>();
 
-        if (newEgg == null)
-            return;
+//        isPlayer = TryGetComponent(out PlayerController playerController);
 
-        newEgg.transform.position = spitPoint.position;
-        newEgg.transform.rotation = Quaternion.identity;
+//        // Player data
+//        if (isPlayer)
+//            this.playerController = playerController;
 
-        // TODO: Add trajectory
+//        // Non-player data
+//        nonPlayerMovementSeed = Random.Range(0, 100);
 
-        Disable();
-    }
+//        // Initialization
+//        InitializeAnimator();
+//        EnsureMinMaxDirections();
+//        SetState(active ? CreatureState.Alive : CreatureState.Egg);
 
-    #region Helper functions
+//        // Timers
+//        float currentGenerationLifespan = isPlayer ? lifespan : Random.Range(lifespan * 0.5f, lifespan * 3f);
+//        lifespanTimer.SetPeriod(currentGenerationLifespan);
+//        naturalHatchTimer.SetPeriod(Random.Range(lifespan * 0.2f, lifespan * 1.4f));
+//        extinctionTimer.SetPeriod(lifespan);
 
-    Vector2 GetMoveDirection()
-    {
-        if (playerController != null)
-            return GetPlayerMoveDirection();
-        else
-            return GetRandomMoveDirection();
-    }
+//        // Event subscription
+//        StateEventManager.OnLayEgg += SpitEgg;
+//        StateEventManager.OnDeath += TurnIntoDeadBody;
+//        lifespanTimer.OnTick += DieAndBirthSelf;
+//        naturalHatchTimer.OnTick += Hatch;
+//        //extinctionTimer.OnTick += TurnIntoDeadBody;
+//    }
 
-    Vector2 GetPlayerMoveDirection()
-    {
-        float angle = playerController.MoveAngle;
-        angle = angle.ClampAngleRad(minDirection, maxDirection);
+//    public void ReinitializeInstance()
+//    {
+//        InitializeAnimator();
 
-#if UNITY_EDITOR
-        Debug.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0));
-#endif
+//        float currentGenerationLifespan = isPlayer ? lifespan : Random.Range(lifespan * 0.5f, lifespan * 3f);
+//        lifespanTimer.SetPeriod(currentGenerationLifespan);
+//        naturalHatchTimer.SetPeriod(Random.Range(lifespan * 0.2f, lifespan * 1.4f));
 
-        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-    }
+//        SetState(CreatureState.Egg);
+//    }
+
+//    void InitializeAnimator()
+//    {
+//        animator.SetBool(hatch, false);
+//        animator.SetBool(die, false);
+//        animator.SetFloat(deathType, Mathf.Floor(Random.Range(0, 3)));
+//    }
+
+//    void ResetValues()
+//    {
+//        lifespanTimer.Stop();
+//        naturalHatchTimer.Stop();
+//        extinctionTimer.Stop();
+
+//        InitializeAnimator();
+//    }
+
+//    #endregion
+
+//    #region Helper methods
+
+//    Vector2 GetMoveDirection()
+//    {
+//        if (playerController != null)
+//            return GetPlayerMoveDirection();
+//        else
+//            return GetRandomMoveDirection();
+//    }
+
+//    Vector2 GetPlayerMoveDirection()
+//    {
+//        float angle = playerController.MoveAngle;
+//        angle = angle.ClampAngleRad(minDirection, maxDirection);
+
+//#if UNITY_EDITOR
+//        Debug.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0));
+//#endif
+
+//        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+//    }
     
-    Vector2 GetRandomMoveDirection()
-    {
-        float t = Mathf.PerlinNoise(Time.time * franticness + nonPlayerMovementSeed, 0);
-        float angle = Mathf.Lerp(minDirection, maxDirection, t);
+//    Vector2 GetRandomMoveDirection()
+//    {
+//        float t = Mathf.PerlinNoise(Time.time * franticness + nonPlayerMovementSeed, 0);
+//        float angle = Mathf.Lerp(minDirection, maxDirection, t);
 
-#if UNITY_EDITOR
-        Debug.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0));
-#endif
+//#if UNITY_EDITOR
+//        Debug.DrawLine(transform.position, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0));
+//#endif
 
-        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-    }
+//        return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+//    }
 
-    void InitializeAnimator()
-    {
-        animator.SetBool(hatch, true);
-        animator.SetBool(die, false);
-        animator.SetFloat(deathType, Mathf.Floor(Random.Range(0, 3)));
-    }
+//    #endregion
 
-    #endregion
+//    #region Gizmos
 
-    #region Gizmos
+//    void OnDrawGizmosSelected()
+//    {
+//        Gizmos.color = Color.cyan;
+//        Vector3 minVector = new Vector3(Mathf.Cos(minDirection), Mathf.Sin(minDirection), 0);
+//        Gizmos.DrawLine(transform.position, transform.position + minVector);
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Vector3 minVector = new Vector3(Mathf.Cos(minDirection), Mathf.Sin(minDirection), 0);
-        Gizmos.DrawLine(transform.position, transform.position + minVector);
+//        Gizmos.color = Color.magenta;
+//        Vector3 maxVector = new Vector3(Mathf.Cos(maxDirection), Mathf.Sin(maxDirection), 0);
+//        Gizmos.DrawLine(transform.position, transform.position + maxVector);
+//    }
 
-        Gizmos.color = Color.magenta;
-        Vector3 maxVector = new Vector3(Mathf.Cos(maxDirection), Mathf.Sin(maxDirection), 0);
-        Gizmos.DrawLine(transform.position, transform.position + maxVector);
-    }
-
-    #endregion
-}
+//    #endregion
+//}

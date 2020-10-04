@@ -99,15 +99,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a89fe5d486641649b29ab33a967efe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifespan: 5
-  movementSpeed: 3
-  franticness: 5
-  minDirection: -0.41
-  maxDirection: -1.7
+  lifespan: 10
+  oldAgeFactor: 0.5
+  eggDeathDelay: 5
+  minHatchDelay: 2
+  maxHatchDelay: 5
   orderedDeathSprites:
   - {fileID: -2205280899747600636, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
   - {fileID: 6172291534047824159, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
   - {fileID: -1527142111372653631, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
+  movement:
+    speedOverLife:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.1165724
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7683949
+        value: 1
+        inSlope: 0.0000014434144
+        outSlope: 0.0000014434144
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.23088636
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    maxSpeed: 1
+    franticness: 5
+    minAngle: -1.47
+    maxAngle: 0.38
 --- !u!58 &2178560850597934438
 CircleCollider2D:
   m_ObjectHideFlags: 0

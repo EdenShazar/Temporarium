@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 
     public float MoveAngle { get; private set; }
 
-    public bool isActivePlayer;
-
     void Update()
     {
         MoveToMouse();

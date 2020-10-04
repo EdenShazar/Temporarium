@@ -32,14 +32,14 @@ namespace GoodBoy.StateEvents
         {
             if (everyLoop)
             {
-                EveryLoopCheck(stateInfo);
+                EveryLoopCheck(animator, stateInfo);
                 return;
             }
 
-            FirstLoopCheck(stateInfo);
+            FirstLoopCheck(animator, stateInfo);
         }
 
-        void EveryLoopCheck(AnimatorStateInfo stateInfo)
+        void EveryLoopCheck(Animator animator, AnimatorStateInfo stateInfo)
         {
             float loopedTime = normalizedTime ? stateInfo.NormalizedTimeLooped() : stateInfo.RealTimeLooped();
 
@@ -48,19 +48,19 @@ namespace GoodBoy.StateEvents
             {
                 // Raise event of previous loop if missed
                 if (previousLoopedTime < eventTime)
-                    StateEventManager.Raise(eventName);
+                    StateEventManager.Raise(eventName, animator.gameObject.GetInstanceID());
 
                 raised = false;
             }
 
             if (loopedTime >= eventTime)
             {
-                StateEventManager.Raise(eventName);
+                StateEventManager.Raise(eventName, animator.gameObject.GetInstanceID());
                 raised = true;
             }
         }
 
-        void FirstLoopCheck(AnimatorStateInfo stateInfo)
+        void FirstLoopCheck(Animator animator, AnimatorStateInfo stateInfo)
         {
             if (raised)
                 return;
@@ -69,7 +69,7 @@ namespace GoodBoy.StateEvents
 
             if (time >= eventTime)
             {
-                StateEventManager.Raise(eventName);
+                StateEventManager.Raise(eventName, animator.gameObject.GetInstanceID());
                 raised = true;
             }
         }
