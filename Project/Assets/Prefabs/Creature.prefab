@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2178560850597934457}
   - component: {fileID: 2301064847564935422}
   m_Layer: 9
-  m_Name: Other creature
+  m_Name: Creature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6132005506069799196}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,6 +104,10 @@ MonoBehaviour:
   franticness: 5
   minDirection: -0.41
   maxDirection: -1.7
+  orderedDeathSprites:
+  - {fileID: -2205280899747600636, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
+  - {fileID: 6172291534047824159, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
+  - {fileID: -1527142111372653631, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
 --- !u!58 &2178560850597934438
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -159,3 +164,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &7339486660720385941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6132005506069799196}
+  m_Layer: 9
+  m_Name: Spit point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6132005506069799196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339486660720385941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.836, y: 0.933, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2178560850597934436}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

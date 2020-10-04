@@ -2,11 +2,13 @@
 
 public class PlayerController : MonoBehaviour
 {
-    // Movement variabless
+    // Movement variables
     Vector3 mouseScreenPos;
     Vector3 objectScreenPos;
 
     public float MoveAngle { get; private set; }
+
+    public bool isActivePlayer;
 
     void Update()
     {

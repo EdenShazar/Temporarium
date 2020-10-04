@@ -5,16 +5,14 @@ public class CameraController : MonoBehaviour
 {
     CinemachineVirtualCamera cam;
     CinemachineBrain brain;
-    GameObject player;
     ScaleManager sm;
     
-    void Awake()
+    void Start()
     {
-        SetPlayer();
         sm = FindObjectOfType<ScaleManager>();
         brain = FindObjectOfType<CinemachineBrain>();
         cam = (CinemachineVirtualCamera)brain.ActiveVirtualCamera;
-        
+
         SetOrthographicSize();
     }
 
@@ -24,12 +22,8 @@ public class CameraController : MonoBehaviour
         SetOrthographicSize();
     }
 
-    public void SetPlayer() {
-        player = FindObjectOfType<PlayerController>().gameObject;
-    }
-
     void SetOrthographicSize()
     {
-        cam.m_Lens.OrthographicSize = sm.GetTargetCameraScale(player.transform.position);
+        cam.m_Lens.OrthographicSize = sm.GetTargetCameraScale(GameManager.Player.transform.position);
     }
 }

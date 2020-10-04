@@ -30,8 +30,8 @@ public class RadarController : MonoBehaviour
         UpdateEllipse();
         AdvanceScanline();
 
-        angleToPlayer = (GameManager.player.transform.position - transform.position).ToVector2().GetAngleDeg();
-        isPlayerInRange = IsPointInEllipse(GameManager.player.transform.position);
+        angleToPlayer = (GameManager.Player.transform.position - transform.position).ToVector2().GetAngleDeg();
+        isPlayerInRange = IsPointInEllipse(GameManager.Player.transform.position);
 
         DebugVizualize();
     }
@@ -76,7 +76,7 @@ public class RadarController : MonoBehaviour
 
 
     bool IsPlayerInEllipse() {
-        return IsPointInEllipse(GameManager.player.transform.position);
+        return IsPointInEllipse(GameManager.Player.transform.position);
     }
 
     bool IsPlayerNearScanLine()

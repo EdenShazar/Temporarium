@@ -11,6 +11,7 @@ public class CreatureController : MonoBehaviour
     [SerializeField] [Min(0.01f)] float franticness = 1f;
     [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float minDirection = -Mathf.PI;
     [SerializeField] [Range(-Mathf.PI, Mathf.PI)] float maxDirection = Mathf.PI;
+    [SerializeField] Sprite[] orderedDeathSprites;
 
     CreatureState state;
     readonly Timer timer = new Timer();
@@ -22,7 +23,8 @@ public class CreatureController : MonoBehaviour
 
     Collider2D collider;
 
-    ScaleManager sm; 
+    ScaleManager sm;
+    Transform spitPoint;
 
     #region Non-player fields
 
@@ -52,7 +54,18 @@ public class CreatureController : MonoBehaviour
 
         InitializeAnimator();
 
+        spitPoint = GetComponentInChildren<Transform>();
+
+        if (minDirection > maxDirection)
+        {
+            float temp = minDirection;
+            minDirection = maxDirection;
+            maxDirection = temp;
+        }
+
         SetState(CreatureState.Alive);
+
+        StateEventManager.OnSpitEgg += SpitEgg;
     }
 
     void Update()
@@ -68,18 +81,31 @@ public class CreatureController : MonoBehaviour
                 AliveBehavior();
                 break;
         }
-
-        if (minDirection > maxDirection)
-        {
-            float temp = minDirection;
-            minDirection = maxDirection;
-            maxDirection = temp;
-        }
+    }
+    void OnDestroy()
+    {
+        StateEventManager.OnSpitEgg -= SpitEgg;
     }
 
     void ResetValues()
     {
         InitializeAnimator();
+    }
+
+    void Disable()
+    {
+        GameManager.FreeInstance(gameObject);
+        
+        GameObject body = GameManager.GetFreeBodyInstance();
+        if (body != null)
+        {
+            body.transform.position = transform.position;
+            body.GetComponent<SpriteRenderer>().sprite = orderedDeathSprites[(int)animator.GetFloat(deathType)];
+        }
+
+        enabled = false;
+        isPlayer = false;
+        StateEventManager.OnSpitEgg -= SpitEgg;
     }
 
     void EggBehavior()
@@ -112,7 +138,7 @@ public class CreatureController : MonoBehaviour
 
                 if (!isPlayer)
                 {
-                    timer.SetPeriod(Random.Range(lifespan * 0.2f, lifespan * 0.4f));
+                    timer.SetPeriod(Random.Range(lifespan * 0.2f, lifespan * 1.4f));
                     timer.Start();
 
                     timer.OnTick -= DieAndBirthSelf;
@@ -136,7 +162,7 @@ public class CreatureController : MonoBehaviour
 
                 if (!isPlayer)
                 {
-                    timer.SetPeriod(Random.Range(lifespan * 0.7f, lifespan * 1.3f));
+                    timer.SetPeriod(Random.Range(lifespan * 0.5f, lifespan * 3f));
                     timer.Start();
 
                     timer.OnTick -= Hatch;
@@ -184,13 +210,33 @@ public class CreatureController : MonoBehaviour
 
     void Move()
     {
-        if (playerController != null)
-            transform.Translate(GetPlayerMoveDirection() * movementSpeed * Time.deltaTime);
-        else
-            transform.Translate(GetRandomMoveDirection() * movementSpeed * Time.deltaTime);
+        transform.Translate(GetMoveDirection() * movementSpeed * Time.deltaTime);
+    }
+
+    void SpitEgg()
+    {
+        GameObject newEgg = isPlayer ? GameManager.GetFreePlayerInstance(forced: true) : GameManager.GetFreeCreatureInstance();
+
+        if (newEgg == null)
+            return;
+
+        newEgg.transform.position = spitPoint.position;
+        newEgg.transform.rotation = Quaternion.identity;
+
+        // TODO: Add trajectory
+
+        Disable();
     }
 
     #region Helper functions
+
+    Vector2 GetMoveDirection()
+    {
+        if (playerController != null)
+            return GetPlayerMoveDirection();
+        else
+            return GetRandomMoveDirection();
+    }
 
     Vector2 GetPlayerMoveDirection()
     {

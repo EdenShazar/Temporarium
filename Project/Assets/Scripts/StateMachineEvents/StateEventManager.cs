@@ -2,122 +2,119 @@
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace GoodBoy.StateEvents
+public static class StateEventManager
 {
-    public static class StateEventManager
+    #region Event declarations
+
+    // All events are declared here, but must be categorized in the "event categorization" region.
+    // Any type of built-in or custom delegate may be used as an event handler.
+
+    // Creature layer
+    public static event Action OnSpitEgg;
+
+    #endregion
+
+    #region Event categorization
+
+    // Events are defined in separate dictionaries - each a main category. In each dictionary,
+    // the events are then further categorized by animation layer. General events can be used
+    // as any type of event.
+    // The event names must be identical to the names of their corresponding event variables;
+    // use the nameof() expression to ensure this equality and still support easy refactoring.
+
+    #region Enter events
+
+    public static Dictionary<string, List<string>> EnterEvents { get; } =
+        new Dictionary<string, List<string>>
+        {
+            { "Creature",
+                new List<string>
+                {
+                        
+                }
+            }
+        };
+
+    #endregion
+
+    #region Exit events
+
+    public static Dictionary<string, List<string>> ExitEvents { get; } =
+        new Dictionary<string, List<string>>
+        {
+            { "Creature",
+                new List<string>
+                {
+                        
+                }
+            }
+        };
+
+    #endregion
+
+    #region Timed events
+
+    public static Dictionary<string, List<string>> TimedEvents { get; } =
+        new Dictionary<string, List<string>>
+        {
+            { "Creature",
+                new List<string>
+                {
+                    nameof(OnSpitEgg)
+                }
+            }
+        };
+
+    #endregion
+
+    #region General events
+
+    public static Dictionary<string, List<string>> GeneralEvents { get; } =
+        new Dictionary<string, List<string>>
+        {
+            { "Creature",
+                new List<string>
+                {
+                        
+                }
+            }
+        };
+
+    #endregion
+
+    #endregion
+
+    public static void Raise(string eventName)
     {
-        #region Event declarations
+        if (eventName == "")
+            return;
 
-        // All events are declared here, but must be categorized in the "event categorization" region.
-        // Any type of built-in or custom delegate may be used as an event handler.
+        if (!eventFields.ContainsKey(eventName))
+            throw new Exception("No event named " + eventName + " exists.");
 
-        // Creature layer
-        public static event Action SpitEgg;
+        var eventDelegate = (MulticastDelegate)eventFields[eventName].GetValue(null);
+        eventDelegate?.DynamicInvoke();
+    }
 
-        #endregion
+    #region Implementation details
 
-        #region Event categorization
+    static Dictionary<string, FieldInfo> eventFields;
 
-        // Events are defined in separate dictionaries - each a main category. In each dictionary,
-        // the events are then further categorized by animation layer. General events can be used
-        // as any type of event.
-        // The event names must be identical to the names of their corresponding event variables;
-        // use the nameof() expression to ensure this equality and still support easy refactoring.
+    static StateEventManager()
+    {
+        SetEventFields();
+    }
 
-        #region Enter events
+    static void SetEventFields()
+    {
+        eventFields = new Dictionary<string, FieldInfo>();
 
-        public static Dictionary<string, List<string>> EnterEvents { get; } =
-            new Dictionary<string, List<string>>
-            {
-                { "Creature",
-                    new List<string>
-                    {
-                        
-                    }
-                }
-            };
+        BindingFlags bindingFlags = BindingFlags.Static | BindingFlags.NonPublic;
+        FieldInfo[] fields = typeof(StateEventManager).GetFields(bindingFlags);
 
-        #endregion
-
-        #region Exit events
-
-        public static Dictionary<string, List<string>> ExitEvents { get; } =
-            new Dictionary<string, List<string>>
-            {
-                { "Creature",
-                    new List<string>
-                    {
-                        
-                    }
-                }
-            };
-
-        #endregion
-
-        #region Timed events
-
-        public static Dictionary<string, List<string>> TimedEvents { get; } =
-            new Dictionary<string, List<string>>
-            {
-                { "Creature",
-                    new List<string>
-                    {
-                        nameof(SpitEgg)
-                    }
-                }
-            };
-
-        #endregion
-
-        #region General events
-
-        public static Dictionary<string, List<string>> GeneralEvents { get; } =
-            new Dictionary<string, List<string>>
-            {
-                { "Creature",
-                    new List<string>
-                    {
-                        
-                    }
-                }
-            };
-
-        #endregion
-
-        #endregion
-
-        public static void Raise(string eventName)
-        {
-            if (eventName == "")
-                return;
-
-            if (!eventFields.ContainsKey(eventName))
-                throw new Exception("No event named " + eventName + " exists.");
-
-            var eventDelegate = (MulticastDelegate)eventFields[eventName].GetValue(null);
-            eventDelegate?.DynamicInvoke();
-        }
-
-        #region Implementation details
-
-        static Dictionary<string, FieldInfo> eventFields;
-
-        static StateEventManager()
-        {
-            SetEventFields();
-        }
-
-        static void SetEventFields()
-        {
-            eventFields = new Dictionary<string, FieldInfo>();
-
-            BindingFlags bindingFlags = BindingFlags.Static | BindingFlags.NonPublic;
-            FieldInfo[] fields = typeof(StateEventManager).GetFields(bindingFlags);
-
-            foreach (FieldInfo field in fields)
-                if (typeof(MulticastDelegate).IsAssignableFrom(field.FieldType))
-                    eventFields.Add(field.Name, field);
-        }
+        foreach (FieldInfo field in fields)
+            if (typeof(MulticastDelegate).IsAssignableFrom(field.FieldType))
+                eventFields.Add(field.Name, field);
     }
 
     #endregion

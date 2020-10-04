@@ -1,18 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public static PlayerController player;
-
     public static Camera camera;
+    
+    static PlayerController player;
+    public static PlayerController Player
+    {
+        get
+        {
+            if (player == null || !player.gameObject.activeSelf)
+                player = playerInstances.First(player => player.activeSelf).GetComponent<PlayerController>();
+            
+            return player;
+        }
+    }
 
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject creaturePrefab;
+    [SerializeField] GameObject bodyPrefab;
     [SerializeField] Transform creatureParent;
 
-    List<GameObject> Creatures = new List<GameObject>();
+    static GameObject[] playerInstances = new GameObject[Constants.maxPlayerInstances];
+    static GameObject[] creatureInstances = new GameObject[Constants.maxCreatureInstances];
+    static GameObject[] bodyInstances = new GameObject[Constants.maxBodyInstances];
+
+    public GameObject PlayerPrefab { get => playerPrefab; }
+    public GameObject CreaturePrefab { get => creaturePrefab; }
+    public Transform CreatureParent { get => creatureParent; }
 
     Collider2D[] overlappingColliders = new Collider2D[0];
     ContactFilter2D noContactFiler = new ContactFilter2D();
@@ -20,17 +37,17 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         EnsureSingleton();
-        player = FindObjectOfType<PlayerController>();
 
         camera = Camera.main;
 
         noContactFiler.NoFilter();
+
+        PopulateInstanceArrays();
     }
 
     void Start()
     {
-        for (int i = 0; i < 20; i++)
-            InstantiateCreature();
+    
     }
 
     void EnsureSingleton()
@@ -46,7 +63,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void InstantiateCreature()
+    GameObject InitializeCreatureInstance()
     {
         float x = Random.Range(0, camera.pixelWidth);
         float y = Random.Range(0, camera.pixelHeight);
@@ -65,6 +82,122 @@ public class GameManager : MonoBehaviour
             validLocation = newCollider.OverlapCollider(noContactFiler, overlappingColliders) == 0;
         }
 
-        Creatures.Add(newCreature);
+        return newCreature;
+    }
+
+    void PopulateInstanceArrays()
+    {
+        player = FindObjectOfType<PlayerController>();
+        playerInstances[0] = player.gameObject;
+        playerInstances[0].SetActive(true);
+
+        for (int i = 1; i < Constants.maxPlayerInstances; i++)
+        {
+            playerInstances[i] = Instantiate(playerPrefab, parent: creatureParent);
+            playerInstances[i].GetComponent<PlayerController>().isActivePlayer = false;
+            playerInstances[i].SetActive(false);
+        }
+
+        for (int i = 0; i < Constants.maxCreatureInstances; i++)
+        {
+            creatureInstances[i] = InitializeCreatureInstance();
+            if (i > Constants.maxCreatureInstances / 2)
+                creatureInstances[i].SetActive(false);
+        }
+
+        for (int i = 0; i < Constants.maxBodyInstances; i++)
+        {
+            bodyInstances[i] = Instantiate(bodyPrefab, parent: creatureParent);
+            bodyInstances[i].SetActive(false);
+        }
+    }
+
+    public static GameObject GetFreePlayerInstance(bool forced = false)
+    {
+        GameObject instance = playerInstances.FirstOrDefault(go => !go.activeSelf);
+
+        if (instance == null)
+        {
+            PurgeNonVisibleObjects(playerInstances);
+            instance = playerInstances.FirstOrDefault(go => !go.activeSelf);
+        }
+
+        if (instance == null)
+            return null;
+
+        instance = FindFarthestObjectFromPlayer(playerInstances);
+
+        instance.SetActive(true);
+
+        return instance;
+    }
+
+    public static GameObject GetFreeCreatureInstance(bool forced = false)
+    {
+        GameObject instance = creatureInstances.FirstOrDefault(go => !go.activeSelf);
+
+        if (instance == null)
+        {
+            PurgeNonVisibleObjects(creatureInstances);
+            instance = creatureInstances.FirstOrDefault(go => !go.activeSelf);
+        }
+
+        if (instance == null)
+            return null;
+
+        instance = FindFarthestObjectFromPlayer(creatureInstances);
+
+        instance.SetActive(true);
+
+        return instance;
+    }
+
+    public static GameObject GetFreeBodyInstance(bool forced = false)
+    {
+        GameObject instance = bodyInstances.FirstOrDefault(go => !go.activeSelf);
+
+        if (instance == null)
+        {
+            PurgeNonVisibleObjects(bodyInstances);
+            instance = bodyInstances.FirstOrDefault(go => !go.activeSelf);
+        }
+
+        if (instance == null && !forced)
+            return null;
+
+        instance = FindFarthestObjectFromPlayer(bodyInstances);
+        
+        instance.SetActive(true);
+
+        return instance;
+    }
+
+    public static void FreeInstance(GameObject instance)
+    {
+        instance.SetActive(false);
+    }
+
+    static void PurgeNonVisibleObjects(GameObject[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
+            if (!array[i].GetComponent<Renderer>().isVisible)
+                array[i].SetActive(false);
+    }
+
+    static GameObject FindFarthestObjectFromPlayer(GameObject[] array)
+    {
+        float largestDistance = Mathf.NegativeInfinity;
+        int farthestIndex = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            float distance = (array[i].transform.position - player.transform.position).sqrMagnitude;
+            if (distance > largestDistance)
+            {
+                largestDistance = distance;
+                farthestIndex = i;
+            }
+        }
+
+        return array[farthestIndex];
     }
 }
