@@ -104,7 +104,10 @@ MonoBehaviour:
   eggDeathDelay: 5
   minHatchDelay: 2
   maxHatchDelay: 5
-  orderedDeathSprites: []
+  orderedDeathSprites:
+  - {fileID: -2205280899747600636, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
+  - {fileID: 6172291534047824159, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
+  - {fileID: -1527142111372653631, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
   movement:
     speedOverLife:
       serializedVersion: 2
@@ -150,8 +153,8 @@ MonoBehaviour:
       m_RotationOrder: 4
     maxSpeed: 1
     franticness: 5
-    minAngle: -3.1415927
-    maxAngle: 3.1415927
+    minAngle: -1.47
+    maxAngle: 0.26
 --- !u!58 &2178560850597934438
 CircleCollider2D:
   m_ObjectHideFlags: 0
