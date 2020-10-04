@@ -13,14 +13,19 @@ public class CreatureController : MonoBehaviour
     [SerializeField] [Min(1)] float eggDeathDelay = 5;
     [SerializeField] [Min(1)] float minHatchDelay = 2;
     [SerializeField] [Min(2)] float maxHatchDelay = 5;
+    [SerializeField] [Min(1)] float spitStrength = 2;
+    [SerializeField] [Min(1)] float spitDistance = 3;
     [SerializeField] Sprite[] orderedDeathSprites;
     [SerializeField] CreatureMovement movement;
 #pragma warning restore CS0649
 
     // References
     Animator animator;
+    new Rigidbody2D rigidbody;
     ScaleManager scaleManager;
     Transform spitPoint;
+    //Collider2D regularCollider;
+    //Collider2D eggCollider;
 
     readonly Timer oldAgeTimer = new Timer();
     readonly Timer deathTimer = new Timer();
@@ -34,6 +39,7 @@ public class CreatureController : MonoBehaviour
 
     bool isPlayer;
     int deathType;
+    float eggCollisionHeight;
 
     #region Animator hashes
 
@@ -49,8 +55,11 @@ public class CreatureController : MonoBehaviour
     void Awake()
     {
         animator = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody2D>();
+        //regularCollider = GetComponent<Collider2D>();
         scaleManager = FindObjectOfType<ScaleManager>();
         spitPoint = transform.GetChild(0);
+        //eggCollider = transform.GetChild(1).GetComponent<Collider2D>();
 
         isPlayer = TryGetComponent(out playerController);
 
@@ -71,13 +80,19 @@ public class CreatureController : MonoBehaviour
         UpdateScale();
     }
 
-    public void ActivateInstance()
+    public void ActivateInstance(float eggCollisionHeight = Mathf.NegativeInfinity)
     {
+        if (eggCollisionHeight == Mathf.NegativeInfinity)
+            this.eggCollisionHeight = transform.position.y;
+        else
+            this.eggCollisionHeight = eggCollisionHeight;
+
         gameObject.SetActive(true);
 
         InitializeTimers();
         SubscribeToEvents();
         InitializeAnimator();
+        ActivateEggMode();
 
         WaitToHatch();
     }
@@ -85,20 +100,31 @@ public class CreatureController : MonoBehaviour
     void WaitToHatch()
     {
         if (isPlayer)
-            StartCoroutine(WaitForPlayerToHatch());
+            StartCoroutine(WaitForPlayerinputToHatch());
         else
             hatchTimer.Start();
+
+        StartCoroutine(StopAtEggCollisionHeight());
     }
 
-    IEnumerator WaitForPlayerToHatch()
+    IEnumerator WaitForPlayerinputToHatch()
     {
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         Hatch();
     }
 
+    IEnumerator StopAtEggCollisionHeight()
+    {
+        yield return new WaitUntil(() => transform.position.y <= eggCollisionHeight && rigidbody.velocity.y <= 0);
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.angularVelocity = 0;
+        rigidbody.gravityScale = 0;
+    }
+
     void Hatch()
     {
         animator.SetBool(hatchHash, true);
+        DeactivateEggMode();
         hatchTimer.Stop();
     }
 
@@ -134,12 +160,7 @@ public class CreatureController : MonoBehaviour
         if (egg == null)
             return;
 
-        // Initialize new egg
-        egg.GetComponent<CreatureController>().ActivateInstance();
-        egg.transform.position = spitPoint.position;
-        egg.transform.rotation = Quaternion.identity;
-        if (isPlayer)
-            CameraController.SetFollowTarget(egg.transform);
+        InitializeNewEgg(egg);
 
         // TODO: Add trajectory
     }
@@ -189,6 +210,34 @@ public class CreatureController : MonoBehaviour
         animator.SetFloat(deathTypeHash, deathType);
 
         animator.Play(eggStateHash);
+    }
+
+    void InitializeNewEgg(GameObject egg)
+    {
+        egg.SetActive(true);
+
+        float angle;
+        if (isPlayer)
+        {
+            angle = playerController.MoveAngle;
+            CameraController.SetFollowTarget(egg.transform);
+        }
+        else
+            angle = UnityEngine.Random.Range(movement.MinAngle, movement.MaxAngle);
+
+        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        float upperAngle = (angle + 0.5f * Mathf.PI) / 2;
+        Vector2 upperDirection = new Vector2(Mathf.Cos(upperAngle), Mathf.Sin(upperAngle));
+
+        egg.transform.position = spitPoint.position;
+        egg.transform.rotation = Quaternion.Euler(0, 0, angle - Mathf.PI);
+
+        Rigidbody2D eggRigidbody = egg.GetComponent<Rigidbody2D>();
+        eggRigidbody.velocity = upperDirection * spitStrength;
+        eggRigidbody.angularVelocity = UnityEngine.Random.Range(180, 720);
+
+        float collisionHeight = (transform.position.ToVector2() + direction.normalized * spitDistance).y;
+        egg.GetComponent<CreatureController>().ActivateInstance(collisionHeight);
     }
 
     #endregion
@@ -255,6 +304,27 @@ public class CreatureController : MonoBehaviour
     {
         float targetScale = scaleManager.GetTargetScale(transform.position);
         transform.localScale = new Vector3(targetScale, targetScale, 1f);
+    }
+
+    void DeactivateEggMode()
+    {
+        //regularCollider.enabled = true;
+        //eggCollider.enabled = false;
+
+        gameObject.layer = Constants.creaturesLayer;
+        transform.rotation = Quaternion.identity;
+        rigidbody.gravityScale = 0;
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.angularVelocity = 0;
+    }
+
+    void ActivateEggMode()
+    {
+        //regularCollider.enabled = false;
+        //eggCollider.enabled = true;
+
+        gameObject.layer = Constants.eggLayer;
+        rigidbody.gravityScale = 1;
     }
 
     #endregion

@@ -27,9 +27,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform creatureParent;
 #pragma warning restore CS0649
 
-    static GameObject[] playerInstances = new GameObject[Constants.maxPlayerInstances];
-    static GameObject[] creatureInstances = new GameObject[Constants.maxCreatureInstances];
-    static GameObject[] bodyInstances = new GameObject[Constants.maxBodyInstances];
+    static GameObject[] playerInstances;
+    static GameObject[] creatureInstances;
+    static GameObject[] bodyInstances;
 
     public GameObject PlayerPrefab { get => playerPrefab; }
     public GameObject CreaturePrefab { get => creaturePrefab; }
@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
         EnsureSingleton();
 
         camera = Camera.main;
+
+        playerInstances = new GameObject[Constants.maxPlayerInstances];
+        creatureInstances = new GameObject[Constants.maxCreatureInstances];
+        bodyInstances = new GameObject[Constants.maxBodyInstances];
 
         noContactFiler.NoFilter();
 
