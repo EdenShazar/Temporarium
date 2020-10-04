@@ -24,8 +24,8 @@ public class CreatureController : MonoBehaviour
     new Rigidbody2D rigidbody;
     ScaleManager scaleManager;
     Transform spitPoint;
-    //Collider2D regularCollider;
-    //Collider2D eggCollider;
+    Collider2D regularCollider;
+    Collider2D eggCollider;
 
     readonly Timer oldAgeTimer = new Timer();
     readonly Timer deathTimer = new Timer();
@@ -56,10 +56,10 @@ public class CreatureController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody2D>();
-        //regularCollider = GetComponent<Collider2D>();
+        regularCollider = GetComponent<Collider2D>();
         scaleManager = FindObjectOfType<ScaleManager>();
         spitPoint = transform.GetChild(0);
-        //eggCollider = transform.GetChild(1).GetComponent<Collider2D>();
+        eggCollider = transform.GetChild(1).GetComponent<Collider2D>();
 
         isPlayer = TryGetComponent(out playerController);
 
@@ -308,8 +308,8 @@ public class CreatureController : MonoBehaviour
 
     void DeactivateEggMode()
     {
-        //regularCollider.enabled = true;
-        //eggCollider.enabled = false;
+        regularCollider.enabled = true;
+        eggCollider.enabled = false;
 
         gameObject.layer = Constants.creaturesLayer;
         transform.rotation = Quaternion.identity;
@@ -320,8 +320,8 @@ public class CreatureController : MonoBehaviour
 
     void ActivateEggMode()
     {
-        //regularCollider.enabled = false;
-        //eggCollider.enabled = true;
+        regularCollider.enabled = false;
+        eggCollider.enabled = true;
 
         gameObject.layer = Constants.eggLayer;
         rigidbody.gravityScale = 1;
