@@ -33,6 +33,7 @@ public class CreatureController : MonoBehaviour
     readonly Timer hatchTimer = new Timer();
 
     bool isPlayer;
+    int deathType;
 
     #region Animator hashes
 
@@ -178,11 +179,12 @@ public class CreatureController : MonoBehaviour
     void InitializeAnimator()
     {
         UnityEngine.Random.InitState(seed: DateTime.Now.Millisecond);
+        deathType = UnityEngine.Random.Range(0, 3);
 
         animator.SetBool(hatchHash, false);
         animator.SetBool(dieHash, false);
         animator.SetBool(oldHash, false);
-        animator.SetFloat(deathTypeHash, Mathf.Floor(UnityEngine.Random.Range(0, 3)));
+        animator.SetFloat(deathTypeHash, deathType);
 
         animator.Play(eggStateHash);
     }
@@ -242,8 +244,8 @@ public class CreatureController : MonoBehaviour
         body.SetActive(true);
         body.transform.position = transform.position;
 
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = orderedDeathSprites[(int)animator.GetFloat(deathTypeHash)];
+        SpriteRenderer spriteRenderer = body.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = orderedDeathSprites[deathType];
         spriteRenderer.color = GetComponent<SpriteRenderer>().color;
     }
 
