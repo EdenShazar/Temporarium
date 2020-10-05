@@ -1,0 +1,1150 @@
+fileFormatVersion: 2
+guid: 6616ae6c53b640f4bbe2e918102abc5e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1150446191071317480
+    second: creature_die_1_0
+  - first:
+      213: -7577817648403297724
+    second: creature_die_1_1
+  - first:
+      213: -3877544102774571320
+    second: creature_die_1_2
+  - first:
+      213: -2398053662964442053
+    second: creature_die_1_3
+  - first:
+      213: -4466515095512266080
+    second: creature_die_1_4
+  - first:
+      213: 6001957121515909701
+    second: creature_die_1_5
+  - first:
+      213: -3115643565745178525
+    second: creature_die_1_6
+  - first:
+      213: -6319720499868935100
+    second: creature_die_1_7
+  - first:
+      213: -7394801860054674324
+    second: creature_die_1_8
+  - first:
+      213: 6270153332197656044
+    second: creature_die_1_9
+  - first:
+      213: 6169460368804728246
+    second: creature_die_1_10
+  - first:
+      213: 802755173319097231
+    second: creature_die_1_11
+  - first:
+      213: 2023113685174791677
+    second: creature_die_1_12
+  - first:
+      213: 7135142533945991643
+    second: creature_die_1_13
+  - first:
+      213: -5537507788209411016
+    second: creature_die_1_14
+  - first:
+      213: -8675213112987668062
+    second: creature_die_1_15
+  - first:
+      213: 9133996242677609007
+    second: creature_die_1_16
+  - first:
+      213: -658791360974621067
+    second: creature_die_1_17
+  - first:
+      213: -6481983560093965566
+    second: creature_die_1_18
+  - first:
+      213: 5068520644467402720
+    second: creature_die_1_19
+  - first:
+      213: 2163854740307240934
+    second: creature_die_1_20
+  - first:
+      213: -4656883991687965225
+    second: creature_die_1_21
+  - first:
+      213: 6618824714994728365
+    second: creature_die_1_22
+  - first:
+      213: -5655464932135080647
+    second: creature_die_1_23
+  - first:
+      213: -1787209688156580985
+    second: creature_die_1_24
+  - first:
+      213: 8095649090936576791
+    second: creature_die_1_25
+  - first:
+      213: -5310321642131745199
+    second: creature_die_1_26
+  - first:
+      213: 5252516871768767346
+    second: creature_die_1_27
+  - first:
+      213: -7203168776905923258
+    second: creature_die_1_28
+  - first:
+      213: -2855642978939711034
+    second: creature_die_1_29
+  - first:
+      213: -7080189808078282885
+    second: creature_die_1_30
+  - first:
+      213: -3343138965249961710
+    second: creature_die_1_31
+  - first:
+      213: -35905891197683306
+    second: creature_die_1_32
+  - first:
+      213: -7176429692683566762
+    second: creature_die_1_33
+  - first:
+      213: -4802909682722320870
+    second: creature_die_1_34
+  - first:
+      213: 7681919552508886763
+    second: creature_die_1_35
+  - first:
+      213: -5232896954733515846
+    second: creature_die_1_36
+  - first:
+      213: 8391353762424759857
+    second: creature_die_1_37
+  - first:
+      213: -5090524441207212076
+    second: creature_die_1_38
+  - first:
+      213: -8807662750418677268
+    second: creature_die_1_39
+  - first:
+      213: 9026984347506547392
+    second: creature_die_1_40
+  - first:
+      213: 6340331187261414245
+    second: creature_die_1_41
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: creature_die_1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3210
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8123ef7d84bc800f0800000000000000
+      internalID: -1150446191071317480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_1
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 3210
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44a4c3e6ffe26d690800000000000000
+      internalID: -7577817648403297724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_2
+      rect:
+        serializedVersion: 2
+        x: 2820
+        y: 3210
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cef531ce22303ac0800000000000000
+      internalID: -3877544102774571320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_3
+      rect:
+        serializedVersion: 2
+        x: 4230
+        y: 3210
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3c1ea226e668bed0800000000000000
+      internalID: -2398053662964442053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_4
+      rect:
+        serializedVersion: 2
+        x: 5640
+        y: 3210
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aa421c6f20c302c0800000000000000
+      internalID: -4466515095512266080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_5
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 3210
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 542f419c33c3b4350800000000000000
+      internalID: 6001957121515909701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_6
+      rect:
+        serializedVersion: 2
+        x: 8460
+        y: 3210
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 368f6013fa203c4d0800000000000000
+      internalID: -3115643565745178525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2568
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44cde8d40b7db48a0800000000000000
+      internalID: -6319720499868935100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_8
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 2568
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c641b0b33e2606990800000000000000
+      internalID: -7394801860054674324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_9
+      rect:
+        serializedVersion: 2
+        x: 2820
+        y: 2568
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce58fd42c3f040750800000000000000
+      internalID: 6270153332197656044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_10
+      rect:
+        serializedVersion: 2
+        x: 4230
+        y: 2568
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bdc47aa4835e9550800000000000000
+      internalID: 6169460368804728246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_11
+      rect:
+        serializedVersion: 2
+        x: 5640
+        y: 2568
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8bba43b395f32b00800000000000000
+      internalID: 802755173319097231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_12
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 2568
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfd23118d2b831c10800000000000000
+      internalID: 2023113685174791677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_13
+      rect:
+        serializedVersion: 2
+        x: 8460
+        y: 2568
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd1a1adb45e150360800000000000000
+      internalID: 7135142533945991643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1926
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ca1de6102d623b0800000000000000
+      internalID: -5537507788209411016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_15
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 1926
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a13f8113a37b9780800000000000000
+      internalID: -8675213112987668062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_16
+      rect:
+        serializedVersion: 2
+        x: 2820
+        y: 1926
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f223d80503972ce70800000000000000
+      internalID: 9133996242677609007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_17
+      rect:
+        serializedVersion: 2
+        x: 4230
+        y: 1926
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 576f2046fb08bd6f0800000000000000
+      internalID: -658791360974621067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_18
+      rect:
+        serializedVersion: 2
+        x: 5640
+        y: 1926
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2036dac8b4e5b06a0800000000000000
+      internalID: -6481983560093965566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_19
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 1926
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e7a6360ca0075640800000000000000
+      internalID: 5068520644467402720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_20
+      rect:
+        serializedVersion: 2
+        x: 8460
+        y: 1926
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e7ee85fb6e870e10800000000000000
+      internalID: 2163854740307240934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1284
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d55c3bceac6f5fb0800000000000000
+      internalID: -4656883991687965225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_22
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 1284
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dad36df920acadb50800000000000000
+      internalID: 6618824714994728365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_23
+      rect:
+        serializedVersion: 2
+        x: 2820
+        y: 1284
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93de860bb90c381b0800000000000000
+      internalID: -5655464932135080647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_24
+      rect:
+        serializedVersion: 2
+        x: 4230
+        y: 1284
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7835a46f14e8237e0800000000000000
+      internalID: -1787209688156580985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_25
+      rect:
+        serializedVersion: 2
+        x: 5640
+        y: 1284
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b1d73a4f5895070800000000000000
+      internalID: 8095649090936576791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_26
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 1284
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1561bad0a92fd46b0800000000000000
+      internalID: -5310321642131745199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_27
+      rect:
+        serializedVersion: 2
+        x: 8460
+        y: 1284
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27bf58e0440b4e840800000000000000
+      internalID: 5252516871768767346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 642
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64566535924390c90800000000000000
+      internalID: -7203168776905923258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_29
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 642
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c1d5fa27d7be58d0800000000000000
+      internalID: -2855642978939711034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_30
+      rect:
+        serializedVersion: 2
+        x: 2820
+        y: 642
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7f172bc1ec1ebd90800000000000000
+      internalID: -7080189808078282885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_31
+      rect:
+        serializedVersion: 2
+        x: 4230
+        y: 642
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2115285e2d8ca91d0800000000000000
+      internalID: -3343138965249961710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_32
+      rect:
+        serializedVersion: 2
+        x: 5640
+        y: 642
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69971dd38cf608ff0800000000000000
+      internalID: -35905891197683306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_33
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 642
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 651c7048733386c90800000000000000
+      internalID: -7176429692683566762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_34
+      rect:
+        serializedVersion: 2
+        x: 8460
+        y: 642
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1e4d092713a85db0800000000000000
+      internalID: -4802909682722320870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bee7b68e129ab9a60800000000000000
+      internalID: 7681919552508886763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_36
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 0
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abba2ead1f30167b0800000000000000
+      internalID: -5232896954733515846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_37
+      rect:
+        serializedVersion: 2
+        x: 2820
+        y: 0
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13627f1a9c3147470800000000000000
+      internalID: 8391353762424759857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_38
+      rect:
+        serializedVersion: 2
+        x: 4230
+        y: 0
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d77661ddf2da59b0800000000000000
+      internalID: -5090524441207212076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_39
+      rect:
+        serializedVersion: 2
+        x: 5640
+        y: 0
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce1dadbb465e4c580800000000000000
+      internalID: -8807662750418677268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_40
+      rect:
+        serializedVersion: 2
+        x: 7050
+        y: 0
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ca9322ef6a464d70800000000000000
+      internalID: 9026984347506547392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_die_1_41
+      rect:
+        serializedVersion: 2
+        x: 8460
+        y: 0
+        width: 1410.2858
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56b1c0f4f916df750800000000000000
+      internalID: 6340331187261414245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
