@@ -92,7 +92,7 @@ public class GuardController : MonoBehaviour
             return;
         }
 
-        if (IsPlayerSpotted() && GameManager.player.IsSpottable)
+        if (IsPlayerSpotted() && PlayerModule.CurrentPlayer.IsSpottable)
             ChasePlayer();
         else
             ReturnToGuardingPosition();
@@ -100,17 +100,17 @@ public class GuardController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.transform != GameManager.player.transform)
+        if (PlayerModule.CurrentPlayer == null || collider.transform != PlayerModule.CurrentPlayer.transform)
             return;
 
-        if (isHoldingGem)
-        { 
-            LoseGem();
-            GameManager.player.CarryGem();
+        if (GameManager.GemHolder == transform)
+        {
+            if (PlayerModule.CurrentPlayer.TryTakeGemFrom(transform))
+                LoseGem();
             return;
         }
 
-        if (GameManager.player.transform == GameManager.GemHolder)
+        if (GameManager.GemHolder == PlayerModule.CurrentPlayer.transform)
             EatPlayer();
     }
 
@@ -120,8 +120,8 @@ public class GuardController : MonoBehaviour
 
         if (toNearestAltar.sqrMagnitude <= 0.5f)
         {
+            nearestAltar.StoreGem(from: transform);
             LoseGem();
-            nearestAltar.StoreGem();
             return;
         }
 
@@ -130,7 +130,7 @@ public class GuardController : MonoBehaviour
 
     void ChasePlayer()
     {
-        Vector2 toPlayer = GameManager.player.transform.position - transform.position;
+        Vector2 toPlayer = PlayerModule.CurrentPlayer.transform.position - transform.position;
 
         transform.Translate(toPlayer.normalized * chaseSpeed * Time.deltaTime);
     }
@@ -148,16 +148,17 @@ public class GuardController : MonoBehaviour
     void EatPlayer()
     {
         animator.SetTrigger(eatHash);
-        GameManager.player.Eaten();
-        HoldGem();
+        TakeGemFromPlayer();
+        PlayerModule.CurrentPlayer.Eaten();
     }
 
-    void HoldGem()
+    void TakeGemFromPlayer()
     {
+        if (!GameManager.TakeGemFrom(from: PlayerModule.CurrentPlayer.transform, taker: transform))
+            return;
+
         isHoldingGem = true;
         gem.color = Color.white;
-        GameManager.GemHolder = transform;
-        GameManager.NotifyGemOwner(isPlayer: false);
     }
 
     void LoseGem()
@@ -219,7 +220,7 @@ public class GuardController : MonoBehaviour
 
     bool IsPlayerSpotted()
     {
-        return GameManager.player != null && IsPlayerInEllipse();
+        return PlayerModule.CurrentPlayer != null && IsPlayerInEllipse();
     }
 
     bool IsPlayerInEllipse()
@@ -227,12 +228,12 @@ public class GuardController : MonoBehaviour
         //if (!IsPlayerNearScanLine())
         //    return false;
 
-        return IsPointInEllipse(GameManager.player.transform.position);
+        return IsPointInEllipse(PlayerModule.CurrentPlayer.transform.position);
     }
 
     bool IsPlayerNearScanLine()
     {
-        float angleToPlayer = (GameManager.player.transform.position - transform.position).ToVector2().GetAngleDeg();
+        float angleToPlayer = (PlayerModule.CurrentPlayer.transform.position - transform.position).ToVector2().GetAngleDeg();
 
         return angleToPlayer >= scanWidth - scanWidth / 2 && angleToPlayer <= scanWidth + scanWidth / 2;
     }

@@ -6,21 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     new public static Camera camera;
-    
-    public static CreatureController player;
 
     public static Gem unheldGem;
-    static Transform gemHolder;
 
-    public static Transform GemHolder
-    {
-        get => gemHolder;
-        set
-        {
-            gemHolder = value;
-            CameraController.GemCamera.Follow = gemHolder;
-        }
-    }
+    public static Transform GemHolder { get; private set; }
 
 #pragma warning disable CS0649
     [SerializeField] GameObject playerPrefab;
@@ -171,31 +160,26 @@ public class GameManager : MonoBehaviour
 
     public static void NotifyDeactivatedPlayer()
     {
-        player = null;
-
         NotifyDisabledCreatureInstance();
         SearchForPlayer();
 
         Debug.Log("Player has been deactivated!");
     }
 
-    public static void NotifyActivatedPlayer(CreatureController newPlayer)
+    public static void NotifyActivatedPlayer()
     {
-        player = newPlayer;
-
         NotifyEnabledCreatureInstance();
         StopSearchingForPlayer();
 
         Debug.Log("Player has been activated!");
     }
 
-    public static void NotifyGemOwner(bool isPlayer)
+    public static void ClassifyGemHolder()
     {
-        if (isPlayer)
-            CameraController.ActivatePlayerCamera();
-        else
+        if (PlayerModule.CurrentPlayer == null || GemHolder == null || GemHolder != PlayerModule.CurrentPlayer.transform)
             CameraController.ActivateGemCamera();
-
+        else
+            CameraController.ActivatePlayerCamera();
     }
 
     static void CountActiveCreatures()
@@ -241,7 +225,7 @@ public class GameManager : MonoBehaviour
         int farthestIndex = 0;
         for (int i = 0; i < array.Length; i++)
         {
-            float distance = (array[i].transform.position - player.transform.position).sqrMagnitude;
+            float distance = (array[i].transform.position - PlayerModule.CurrentPlayer.transform.position).sqrMagnitude;
             if (distance > largestDistance)
             {
                 largestDistance = distance;
@@ -250,5 +234,42 @@ public class GameManager : MonoBehaviour
         }
 
         return array[farthestIndex];
+    }
+
+    public static bool TryTakeGem(Transform taker)
+    {
+        if (GemHolder != null)
+        {
+            Debug.Log(taker.name + " failed to take the gem.");
+            return false;
+        }
+
+        GemHolder = taker;
+        ClassifyGemHolder();
+
+        PlayerModule.RecordTakenGem(taker);
+
+        Debug.Log(taker.name + " took the gem.");
+
+        return true;
+    }
+
+    public static bool TakeGemFrom(Transform from, Transform taker)
+    {
+        if (GemHolder != from)
+        {
+            Debug.Log(taker.name + " failed to take the gem from " + from.name);
+            return false;
+        }
+
+        GemHolder = taker;
+        ClassifyGemHolder();
+
+        PlayerModule.RecordTakenGem(taker);
+        PlayerModule.RecordLostGem(from);
+
+        Debug.Log(taker.name + " took the gem from " + from.name);
+
+        return true;
     }
 }
