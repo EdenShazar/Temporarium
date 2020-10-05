@@ -37,6 +37,16 @@ public class CreatureMovement
         EnsureMinMaxDirections();
     }
 
+    public void NotifyConvertedToPlayer(Func<float> getInputAngle)
+    {
+        this.getInputAngle = getInputAngle;
+    }
+
+    public void NotifyConvertedToNonPlayer()
+    {
+        getInputAngle = null;
+    }
+
     public void Update(float age)
     {
         if (age > lifespan || age == 0)

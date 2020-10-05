@@ -6,19 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     new public static Camera camera;
     
-    static PlayerController player;
-    public static PlayerController Player
-    {
-        get
-        {
-            if (player == null || !player.gameObject.activeSelf)
-                player = playerInstances.First(player => player.activeSelf).GetComponent<PlayerController>();
-            
-            return player;
-        }
-
-        set => player = value;
-    }
+    public static PlayerModule player;
 
 #pragma warning disable CS0649
     [SerializeField] GameObject playerPrefab;
@@ -27,7 +15,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform creatureParent;
 #pragma warning restore CS0649
 
-    static GameObject[] playerInstances;
     static GameObject[] creatureInstances;
     static GameObject[] bodyInstances;
 
@@ -35,8 +22,13 @@ public class GameManager : MonoBehaviour
     public GameObject CreaturePrefab { get => creaturePrefab; }
     public Transform CreatureParent { get => creatureParent; }
 
-    Collider2D[] overlappingColliders = new Collider2D[0];
-    ContactFilter2D noContactFiler = new ContactFilter2D();
+    static Collider2D[] overlappingColliders = new Collider2D[0];
+    static ContactFilter2D noContactFiler = new ContactFilter2D();
+
+    static int activeCreatureCount = 0;
+    const float creatureScreenBuffer = 0.1f;
+
+    public static bool IsSearchingForPlayer { get; private set; }
 
     void Awake()
     {
@@ -44,13 +36,17 @@ public class GameManager : MonoBehaviour
 
         camera = Camera.main;
 
-        playerInstances = new GameObject[Constants.maxPlayerInstances];
         creatureInstances = new GameObject[Constants.maxCreatureInstances];
         bodyInstances = new GameObject[Constants.maxBodyInstances];
 
         noContactFiler.NoFilter();
 
         PopulateInstanceArrays();
+    }
+
+    void Start()
+    {
+        SearchForPlayer();
     }
 
     void EnsureSingleton()
@@ -66,40 +62,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    GameObject InitializeCreatureInstance()
+    static void PositionCreatureInstance(GameObject creature, bool outsideScreenTopLeft = false)
     {
-        float x = Random.Range(0, camera.pixelWidth);
-        float y = Random.Range(0, camera.pixelHeight);
-        Vector2 creaturePosition = camera.ScreenToWorldPoint(new Vector3(x, y, 0)).ToVector2();
+        //Vector2 creaturePosition = camera.ScreenToWorldPoint(new Vector3(x, y, 0)).ToVector2();
 
-        GameObject newCreature = Instantiate(creaturePrefab, creaturePosition, Quaternion.identity, creatureParent);
-        Collider2D newCollider = newCreature.GetComponent<Collider2D>();
+        //GameObject newCreature = Instantiate(creaturePrefab, creaturePosition, Quaternion.identity, creatureParent);
+        Collider2D collider = creature.GetComponent<Collider2D>();
 
-        bool validLocation = newCollider.OverlapCollider(noContactFiler, overlappingColliders) == 0;
-
+        bool validLocation = false;
         while (!validLocation)
         {
-            Vector3 newPosition = new Vector3(Random.Range(0, camera.pixelWidth), Random.Range(0, camera.pixelHeight), 0);
-            newCreature.transform.position = newPosition;
+            float x;
+            float y;
+            if (outsideScreenTopLeft)
+            {
+                x = Random.Range(-camera.pixelWidth * creatureScreenBuffer, camera.pixelWidth);
+                y = Random.Range(0, camera.pixelHeight * (1 + creatureScreenBuffer));
+            }
+            else
+            {
+                x = Random.Range(0, camera.pixelWidth);
+                y = Random.Range(0, camera.pixelHeight);
+            }
 
-            validLocation = newCollider.OverlapCollider(noContactFiler, overlappingColliders) == 0;
+            Vector3 newPosition = camera.ScreenToWorldPoint(new Vector3(x, y, 0));
+            newPosition.z = 0;
+            creature.transform.position = newPosition;
+
+            //validLocation = (!outsideScreenTopLeft || x < 0 || y > camera.pixelHeight) &&
+            //    collider.OverlapCollider(noContactFiler, overlappingColliders) == 0;
+            validLocation = collider.OverlapCollider(noContactFiler, overlappingColliders) == 0;
         }
-
-        return newCreature;
     }
 
     void PopulateInstanceArrays()
     {
-        player = FindObjectOfType<PlayerController>(includeInactive: true);
-        playerInstances[0] = player.gameObject;
-        playerInstances[0].GetComponent<CreatureController>().ActivateInstance();
-
-        for (int i = 1; i < Constants.maxPlayerInstances; i++)
-            playerInstances[i] = Instantiate(playerPrefab, parent: creatureParent);
-
         for (int i = 0; i < Constants.maxCreatureInstances; i++)
         {
-            creatureInstances[i] = InitializeCreatureInstance();
+            creatureInstances[i] = Instantiate(creaturePrefab, creatureParent);
+            PositionCreatureInstance(creatureInstances[i]);
             if (i < Constants.maxCreatureInstances / 2)
                 creatureInstances[i].GetComponent<CreatureController>().ActivateInstance();
         }
@@ -109,25 +110,6 @@ public class GameManager : MonoBehaviour
             bodyInstances[i] = Instantiate(bodyPrefab, parent: creatureParent);
             bodyInstances[i].SetActive(false);
         }
-    }
-
-    public static GameObject GetFreePlayerInstance(bool forced = false)
-    {
-        GameObject instance = playerInstances.FirstOrDefault(go => !go.activeSelf);
-
-        if (instance == null)
-        {
-            PurgeNonVisibleObjects(playerInstances);
-            instance = playerInstances.FirstOrDefault(go => !go.activeSelf);
-        }
-
-        if (instance == null && !forced)
-            return null;
-
-        if (instance == null)
-            instance = FindFarthestObjectFromPlayer(playerInstances);
-
-        return instance;
     }
 
     public static GameObject GetFreeCreatureInstance(bool forced = false)
@@ -168,9 +150,45 @@ public class GameManager : MonoBehaviour
         return instance;
     }
 
-    public static void FreeInstance(GameObject instance)
+    public static void NotifyEnabledCreatureInstance()
     {
-        instance.SetActive(false);
+        activeCreatureCount++;
+    }
+
+    public static void NotifyDisabledCreatureInstance()
+    {
+        activeCreatureCount--;
+        
+        while (activeCreatureCount < Constants.maxCreatureInstances / 2)
+        {
+            GameObject creature = GetFreeCreatureInstance();
+            PositionCreatureInstance(creature, outsideScreenTopLeft: true);
+            creature.GetComponent<CreatureController>().ActivateInstance();
+        }
+    }
+
+    public static void NotifyDisabledPlayer()
+    {
+        NotifyDisabledCreatureInstance();
+        SearchForPlayer();
+    }
+
+    public static void NotifyActivatedPlayer()
+    {
+        NotifyEnabledCreatureInstance();
+        StopSearchingForPlayer();
+    }
+
+    static void SearchForPlayer()
+    {
+        IsSearchingForPlayer = true;
+        CameraController.SearchForPlayer();
+    }
+
+    static void StopSearchingForPlayer()
+    {
+        IsSearchingForPlayer = false;
+        CameraController.StopSearchForPlayer();
     }
 
     static void PurgeNonVisibleObjects(GameObject[] array)

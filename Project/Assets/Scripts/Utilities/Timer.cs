@@ -10,10 +10,11 @@ public class Timer
     
     float startTime;
 
-
     bool enabled = false;
 
     public Action OnTick;
+
+    public bool Enabled { get => enabled; }
 
     /// <param name="tickPeriod">Time interval in seconds between calls to <see cref="OnTick"/></param>
     public void SetPeriod(float tickPeriod)
