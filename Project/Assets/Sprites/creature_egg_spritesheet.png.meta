@@ -1,0 +1,1489 @@
+fileFormatVersion: 2
+guid: eab21eb438b07bf4f8301a9d2efcfc81
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7676463713147795881
+    second: creature_egg_spritesheet_0
+  - first:
+      213: -8776669346877008114
+    second: creature_egg_spritesheet_1
+  - first:
+      213: 6487242412868433913
+    second: creature_egg_spritesheet_2
+  - first:
+      213: -3506832880192424061
+    second: creature_egg_spritesheet_3
+  - first:
+      213: 8828001519337821942
+    second: creature_egg_spritesheet_4
+  - first:
+      213: -2626289050267455044
+    second: creature_egg_spritesheet_5
+  - first:
+      213: 3925966369786028193
+    second: creature_egg_spritesheet_6
+  - first:
+      213: 6804688464280338958
+    second: creature_egg_spritesheet_7
+  - first:
+      213: -2869504377341115303
+    second: creature_egg_spritesheet_8
+  - first:
+      213: -4868072698155926005
+    second: creature_egg_spritesheet_9
+  - first:
+      213: -2650833868390207451
+    second: creature_egg_spritesheet_10
+  - first:
+      213: 7004191110149619820
+    second: creature_egg_spritesheet_11
+  - first:
+      213: 6951431697870209638
+    second: creature_egg_spritesheet_12
+  - first:
+      213: -2445310920797761791
+    second: creature_egg_spritesheet_13
+  - first:
+      213: 1321660287331168076
+    second: creature_egg_spritesheet_14
+  - first:
+      213: -9082642714853722516
+    second: creature_egg_spritesheet_15
+  - first:
+      213: 2833371343102008650
+    second: creature_egg_spritesheet_16
+  - first:
+      213: -12754390645120192
+    second: creature_egg_spritesheet_17
+  - first:
+      213: 2469769756819360002
+    second: creature_egg_spritesheet_18
+  - first:
+      213: -109475007057030552
+    second: creature_egg_spritesheet_19
+  - first:
+      213: -6250347446333820652
+    second: creature_egg_spritesheet_20
+  - first:
+      213: -7441409611664535648
+    second: creature_egg_spritesheet_21
+  - first:
+      213: 5153323828896914309
+    second: creature_egg_spritesheet_22
+  - first:
+      213: -3360644124125213439
+    second: creature_egg_spritesheet_23
+  - first:
+      213: 8087290234112427484
+    second: creature_egg_spritesheet_24
+  - first:
+      213: 5625124245941053094
+    second: creature_egg_spritesheet_25
+  - first:
+      213: -1891046086062094357
+    second: creature_egg_spritesheet_26
+  - first:
+      213: -1703506759602638366
+    second: creature_egg_spritesheet_27
+  - first:
+      213: 4373153410707272306
+    second: creature_egg_spritesheet_28
+  - first:
+      213: 4911881473489183745
+    second: creature_egg_spritesheet_29
+  - first:
+      213: -3427842504368850905
+    second: creature_egg_spritesheet_30
+  - first:
+      213: 1293363778002275239
+    second: creature_egg_spritesheet_31
+  - first:
+      213: 395869246470124382
+    second: creature_egg_spritesheet_32
+  - first:
+      213: -3955006917437750818
+    second: creature_egg_spritesheet_33
+  - first:
+      213: -4756498724402050258
+    second: creature_egg_spritesheet_34
+  - first:
+      213: -3737051194858597856
+    second: creature_egg_spritesheet_35
+  - first:
+      213: 4598050677890761062
+    second: creature_egg_spritesheet_36
+  - first:
+      213: 7644963285328273680
+    second: creature_egg_spritesheet_37
+  - first:
+      213: -2679318780696149206
+    second: creature_egg_spritesheet_38
+  - first:
+      213: -8159642722167768458
+    second: creature_egg_spritesheet_39
+  - first:
+      213: -1684225287519083175
+    second: creature_egg_spritesheet_40
+  - first:
+      213: -6656162491217823893
+    second: creature_egg_spritesheet_41
+  - first:
+      213: -6721470318128326381
+    second: creature_egg_spritesheet_42
+  - first:
+      213: 2383801434066330832
+    second: creature_egg_spritesheet_43
+  - first:
+      213: -3119637088434425026
+    second: creature_egg_spritesheet_44
+  - first:
+      213: -2986655631897066050
+    second: creature_egg_spritesheet_45
+  - first:
+      213: 6048967493853033901
+    second: creature_egg_spritesheet_46
+  - first:
+      213: -8040829821513293111
+    second: creature_egg_spritesheet_47
+  - first:
+      213: -9083588566494443428
+    second: creature_egg_spritesheet_48
+  - first:
+      213: 6687517278081155147
+    second: creature_egg_spritesheet_49
+  - first:
+      213: 4317315941300403958
+    second: creature_egg_spritesheet_50
+  - first:
+      213: -5984886479462983795
+    second: creature_egg_spritesheet_51
+  - first:
+      213: -4893664258739235969
+    second: creature_egg_spritesheet_52
+  - first:
+      213: 197946351414149892
+    second: creature_egg_spritesheet_53
+  - first:
+      213: 6070156054636990078
+    second: creature_egg_spritesheet_54
+  - first:
+      213: 2949727464261850868
+    second: creature_egg_spritesheet_55
+  - first:
+      213: 2961233377455762614
+    second: creature_egg_spritesheet_56
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 7
+  spritePivot: {x: 0.5, y: 0}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a9b9515317488a60800000000000000
+      internalID: 7676463713147795881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e071654dab1033680800000000000000
+      internalID: -8776669346877008114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1868
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f7fed68a90570a50800000000000000
+      internalID: 6487242412868433913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3877871531a355fc0800000000000000
+      internalID: -3506832880192424061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2802
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f65dbceb9c538a70800000000000000
+      internalID: 8828001519337821942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 3269
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb17f41060c8d8bd0800000000000000
+      internalID: -2626289050267455044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 3736
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a0e937dc95db7630800000000000000
+      internalID: 3925966369786028193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 4203
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e02c0a00b1c1f6e50800000000000000
+      internalID: 6804688464280338958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 4670
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 954872bd8f87d28d0800000000000000
+      internalID: -2869504377341115303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 5137
+        y: 1680
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0e73a55ca1217cb0800000000000000
+      internalID: -4868072698155926005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 520f60434a8563bd0800000000000000
+      internalID: -2650833868390207451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c60ca6374b2e33160800000000000000
+      internalID: 7004191110149619820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 662c1f78c42787060800000000000000
+      internalID: 6951431697870209638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10f47706ca2801ed0800000000000000
+      internalID: -2445310920797761791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 1868
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4f6d14670b775210800000000000000
+      internalID: 1321660287331168076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c66ba5f9298f3f180800000000000000
+      internalID: -9082642714853722516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 2802
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ddd568938225720800000000000000
+      internalID: 2833371343102008650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 3269
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 043654403ffa2dff0800000000000000
+      internalID: -12754390645120192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 3736
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20988382282664220800000000000000
+      internalID: 2469769756819360002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 4203
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8621594af011b7ef0800000000000000
+      internalID: -109475007057030552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 4670
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 411b0820d1e4249a0800000000000000
+      internalID: -6250347446333820652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 5137
+        y: 1260
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0afce8c626dcab890800000000000000
+      internalID: -7441409611664535648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58bd4f908b8448740800000000000000
+      internalID: 5153323828896914309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d430d79f79c51d0800000000000000
+      internalID: -3360644124125213439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd5c1cf9e93db3070800000000000000
+      internalID: 8087290234112427484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a6e0c0d2b4701e40800000000000000
+      internalID: 5625124245941053094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 1868
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be7406a9a97a1c5e0800000000000000
+      internalID: -1891046086062094357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e17861b0adeb58e0800000000000000
+      internalID: -1703506759602638366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 2802
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 272be796bdf80bc30800000000000000
+      internalID: 4373153410707272306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 3269
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10425260d228a2440800000000000000
+      internalID: 4911881473489183745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 3736
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 728fb1d576bdd60d0800000000000000
+      internalID: -3427842504368850905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 4203
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7abce29e083f2f110800000000000000
+      internalID: 1293363778002275239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 4670
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e537a557bf86e7500800000000000000
+      internalID: 395869246470124382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 5137
+        y: 840
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed109e1c92efc19c0800000000000000
+      internalID: -3955006917437750818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2bca657c958dfdb0800000000000000
+      internalID: -4756498724402050258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 022110fecb3532cc0800000000000000
+      internalID: -3737051194858597856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6614ce2eabe8fcf30800000000000000
+      internalID: 4598050677890761062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01125ee6a9d581a60800000000000000
+      internalID: 7644963285328273680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 1868
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a23c29cb3c521dad0800000000000000
+      internalID: -2679318780696149206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67ab6130d2023ce80800000000000000
+      internalID: -8159642722167768458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 2802
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 955e1bf360e60a8e0800000000000000
+      internalID: -1684225287519083175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_41
+      rect:
+        serializedVersion: 2
+        x: 3269
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b67bea7ea7f80a3a0800000000000000
+      internalID: -6656162491217823893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_42
+      rect:
+        serializedVersion: 2
+        x: 3736
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31911a78b5a88b2a0800000000000000
+      internalID: -6721470318128326381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_43
+      rect:
+        serializedVersion: 2
+        x: 4203
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d4279c36c6f41120800000000000000
+      internalID: 2383801434066330832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_44
+      rect:
+        serializedVersion: 2
+        x: 4670
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e337bbbb892d4b4d0800000000000000
+      internalID: -3119637088434425026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_45
+      rect:
+        serializedVersion: 2
+        x: 5137
+        y: 420
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb50b5ad6844d86d0800000000000000
+      internalID: -2986655631897066050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_46
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da5bef803ef32f350800000000000000
+      internalID: 6048967493853033901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_47
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c2255521eb396090800000000000000
+      internalID: -8040829821513293111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_48
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c588c40635c90f180800000000000000
+      internalID: -9083588566494443428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_49
+      rect:
+        serializedVersion: 2
+        x: 1401
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b40805d4885decc50800000000000000
+      internalID: 6687517278081155147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_50
+      rect:
+        serializedVersion: 2
+        x: 1868
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fe775879ff2aeb30800000000000000
+      internalID: 4317315941300403958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_51
+      rect:
+        serializedVersion: 2
+        x: 2335
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d87129ac47961fca0800000000000000
+      internalID: -5984886479462983795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_52
+      rect:
+        serializedVersion: 2
+        x: 2802
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7392dfc846361cb0800000000000000
+      internalID: -4893664258739235969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_53
+      rect:
+        serializedVersion: 2
+        x: 3269
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40300a8682f3fb200800000000000000
+      internalID: 197946351414149892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_54
+      rect:
+        serializedVersion: 2
+        x: 3736
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e03d745c68d3450800000000000000
+      internalID: 6070156054636990078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: creature_egg_spritesheet_55
+      rect:
+        serializedVersion: 2
+        x: 4203
+        y: 0
+        width: 467.66666
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f69a8b10898fe820800000000000000
+      internalID: 2949727464261850868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
