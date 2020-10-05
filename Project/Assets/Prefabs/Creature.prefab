@@ -205,7 +205,7 @@ MonoBehaviour:
     maxSpeed: 2
     franticness: 5
     minAngle: -1.47
-    maxAngle: 0.43
+    maxAngle: 0.84
 --- !u!58 &2178560850597934438
 CircleCollider2D:
   m_ObjectHideFlags: 0

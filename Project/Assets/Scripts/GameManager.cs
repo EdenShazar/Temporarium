@@ -167,16 +167,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void NotifyDisabledPlayer()
+    public static void NotifyDeactivatedPlayer()
     {
         NotifyDisabledCreatureInstance();
         SearchForPlayer();
+
+        Debug.Log("Player has been deactivated!");
     }
 
     public static void NotifyActivatedPlayer()
     {
         NotifyEnabledCreatureInstance();
         StopSearchingForPlayer();
+
+        Debug.Log("Player has been activated!");
     }
 
     static void SearchForPlayer()

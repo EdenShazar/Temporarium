@@ -129,7 +129,9 @@ public class CreatureController : MonoBehaviour
         playerModule.enabled = false;
         movementModule.NotifyConvertedToNonPlayer();
 
-        GameManager.NotifyDisabledPlayer();
+        GameManager.NotifyDeactivatedPlayer();
+
+        Debug.Log("Converted back from player!");
     }
 
     void WaitToHatch()
@@ -149,7 +151,10 @@ public class CreatureController : MonoBehaviour
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || !gameObject.activeSelf);
 
         if (gameObject.activeSelf)
+        {
             Hatch();
+            finalDeathTimer.Stop();
+        }
     }
 
     IEnumerator StopAtEggCollisionHeight()
@@ -236,7 +241,7 @@ public class CreatureController : MonoBehaviour
         deathTimer.OnTick += BeginDeath;
         StateEventManager.OnLayEgg += LayEgg;
         StateEventManager.OnDeath += Die;
-        finalDeathTimer.OnTick += DisableInstance;
+        finalDeathTimer.OnTick += DisablePlayerOnFinalDeath;
     }
 
     void InitializeAnimator()
@@ -294,10 +299,17 @@ public class CreatureController : MonoBehaviour
         UnsubscribeFromEvents();
         gameObject.SetActive(false);
 
-        if (IsPlayer)
-            GameManager.NotifyDisabledPlayer();
-        else
+        if (!IsPlayer)
             GameManager.NotifyDisabledCreatureInstance();
+    }
+
+    void DisablePlayerOnFinalDeath()
+    {
+        StopTimers();
+        UnsubscribeFromEvents();
+        gameObject.SetActive(false);
+
+        GameManager.NotifyDeactivatedPlayer();
     }
 
     void UnsubscribeFromEvents()
