@@ -16,6 +16,8 @@ public class CreatureController : MonoBehaviour
     [SerializeField] [Min(1)] float spitStrength = 2;
     [SerializeField] [Min(1)] float spitDistance = 3;
     [SerializeField] Sprite[] orderedDeathSprites;
+    [SerializeField] Sprite[] brickSprites;
+    [SerializeField] Sprite gemSprite;
     [SerializeField] CreatureMovement movementModule;
 #pragma warning restore CS0649
 
@@ -26,6 +28,7 @@ public class CreatureController : MonoBehaviour
     Transform spitPoint;
     Collider2D regularCollider;
     Collider2D eggCollider;
+    SpriteRenderer carriableSpriteRenderer;
 
     PlayerModule playerModule;
 
@@ -36,6 +39,7 @@ public class CreatureController : MonoBehaviour
 
     int deathType;
     float eggCollisionHeight;
+    Sprite brickSprite;
 
     bool IsPlayer { get => playerModule.enabled; }
 
@@ -58,6 +62,7 @@ public class CreatureController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spitPoint = transform.GetChild(0);
         eggCollider = transform.GetChild(1).GetComponent<Collider2D>();
+        carriableSpriteRenderer = transform.GetChild(2).GetComponent<SpriteRenderer>();
 
         playerModule = new PlayerModule(transform: transform);
 
@@ -67,6 +72,9 @@ public class CreatureController : MonoBehaviour
         else
             getInputDirection = null;
         movementModule.Initialize(lifespan, getInputDirection, transform);
+
+        UnityEngine.Random.InitState(seed: DateTime.Now.Millisecond);
+        brickSprite = brickSprites[UnityEngine.Random.Range(0, brickSprites.Length - 1)];
 
         // Deactivate until needed
         gameObject.SetActive(false);
@@ -101,6 +109,7 @@ public class CreatureController : MonoBehaviour
         InitializeAnimator();
         ActivateEggMode();
 
+        CarryBrick();
         WaitToHatch();
     }
 
@@ -109,13 +118,17 @@ public class CreatureController : MonoBehaviour
         if (GameManager.player != null)
             return;
 
+        playerModule.enabled = true;
+        gameObject.layer = Constants.playerLayer;
+
+        StopCarry();
+
         if (hatchTimer.Enabled)
         {
             hatchTimer.Stop();
             WaitToHatch();
         }
 
-        playerModule.enabled = true;
         movementModule.NotifyConvertedToPlayer(playerModule.GetMoveAngle);
         CameraController.SetFollowTarget(transform);
 
@@ -126,7 +139,10 @@ public class CreatureController : MonoBehaviour
 
     public void ConvertToNonPlayer()
     {
+        CarryBrick();
+
         playerModule.enabled = false;
+        gameObject.layer = Constants.creaturesLayer;
         movementModule.NotifyConvertedToNonPlayer();
 
         GameManager.NotifyDeactivatedPlayer();
@@ -394,6 +410,23 @@ public class CreatureController : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    void CarryBrick()
+    {
+        carriableSpriteRenderer.enabled = true;
+        carriableSpriteRenderer.sprite = brickSprite;
+    }
+
+    void CarryGem()
+    {
+        carriableSpriteRenderer.enabled = true;
+        carriableSpriteRenderer.sprite = gemSprite;
+    }
+
+    void StopCarry()
+    {
+        carriableSpriteRenderer.enabled = false;
     }
 
     #endregion

@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2178560850597934436}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4855092299219030922
 CircleCollider2D:
@@ -81,9 +81,9 @@ Transform:
   m_Children:
   - {fileID: 6132005506069799196}
   - {fileID: 2870862698750237637}
+  - {fileID: 3084755843702546138}
   - {fileID: 2149775311944031521}
   - {fileID: 2274279805009728995}
-  - {fileID: 3084755843702546138}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,12 +155,19 @@ MonoBehaviour:
   eggDeathDelay: 5
   minHatchDelay: 2
   maxHatchDelay: 5
-  spitStrength: 5
+  spitStrength: 7
   spitDistance: 5
   orderedDeathSprites:
   - {fileID: -2205280899747600636, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
   - {fileID: 6172291534047824159, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
   - {fileID: -1527142111372653631, guid: 0feeb96821f105b489f1433309cda5aa, type: 3}
+  brickSprites:
+  - {fileID: 5832171855535021699, guid: 72ebf10ce6090e24b992bb3c9a225474, type: 3}
+  - {fileID: -448948775454354536, guid: 72ebf10ce6090e24b992bb3c9a225474, type: 3}
+  - {fileID: 1329915113816845207, guid: 72ebf10ce6090e24b992bb3c9a225474, type: 3}
+  - {fileID: -3185777907216620351, guid: 72ebf10ce6090e24b992bb3c9a225474, type: 3}
+  - {fileID: -8155179776209601898, guid: 72ebf10ce6090e24b992bb3c9a225474, type: 3}
+  gemSprite: {fileID: 21300000, guid: b9c29e10350c9b44cab9dec9fec4705a, type: 3}
   movementModule:
     speedOverLife:
       serializedVersion: 2
@@ -302,7 +309,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2178560850597934436}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3537791907090383627
 SpriteRenderer:
@@ -519,7 +526,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2178560850597934436}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.428}
 --- !u!212 &8739731317018110845
 SpriteRenderer:
