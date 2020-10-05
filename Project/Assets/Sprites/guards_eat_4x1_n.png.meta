@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: d2a47bee04ca47947bf3ab55986e23fc
+guid: f2370b6dba85d934e8aacc47472d8720
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 1339273066355817505
-    second: guards_eat_4x1_0
-  - first:
-      213: -7326484597758047730
-    second: guards_eat_4x1_1
-  - first:
-      213: -4221468029915304239
-    second: guards_eat_4x1_2
-  - first:
-      213: 577151584898198644
-    second: guards_eat_4x1_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,12 +41,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 7
-  spritePivot: {x: 0.5, y: 0}
-  spritePixelsToUnits: 200
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -135,91 +123,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: guards_eat_4x1_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2250
-        height: 1843
-      alignment: 9
-      pivot: {x: 0.4646199, y: 0.1271393}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 12cf26112cd069210800000000000000
-      internalID: 1339273066355817505
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guards_eat_4x1_1
-      rect:
-        serializedVersion: 2
-        x: 2250
-        y: 0
-        width: 2250
-        height: 1843
-      alignment: 9
-      pivot: {x: 0.4704679, y: 0.11999991}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e0ac2426319135a90800000000000000
-      internalID: -7326484597758047730
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guards_eat_4x1_2
-      rect:
-        serializedVersion: 2
-        x: 4500
-        y: 0
-        width: 2250
-        height: 1843
-      alignment: 9
-      pivot: {x: 0.49970767, y: 0.13070899}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1deea3e61355a65c0800000000000000
-      internalID: -4221468029915304239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: guards_eat_4x1_3
-      rect:
-        serializedVersion: 2
-        x: 6750
-        y: 0
-        width: 2250
-        height: 1843
-      alignment: 9
-      pivot: {x: 0.53187156, y: 0.11999991}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 47c296ffe44720800800000000000000
-      internalID: 577151584898198644
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -229,9 +133,7 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: f2370b6dba85d934e8aacc47472d8720, type: 3}
-      name: _NormalMap
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
