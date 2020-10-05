@@ -370,6 +370,7 @@ public class CreatureController : MonoBehaviour
         rigidbody.gravityScale = 0;
         rigidbody.velocity = Vector2.zero;
         rigidbody.angularVelocity = 0;
+        rigidbody.freezeRotation = true;
     }
 
     void ActivateEggMode()
@@ -379,6 +380,7 @@ public class CreatureController : MonoBehaviour
 
         gameObject.layer = Constants.eggLayer;
         rigidbody.gravityScale = 1;
+        rigidbody.freezeRotation = false;
     }
 
     bool IsVisible()

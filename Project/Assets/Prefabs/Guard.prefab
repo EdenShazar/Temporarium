@@ -45,14 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737a81fd600900c469086ea8d8915ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rx: 3.45
-  ry: 1.11
-  theta: 0.57
-  isPlayerInRange: 0
-  angleToPlayer: 139.13145
-  scanSpeed: 30
-  scanlineAngle: -118.96409
-  scanWidth: 70
 --- !u!120 &840840332574410500
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -239,8 +231,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1606710979
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -7214062589465078989, guid: e7e133f70dafc544cbfc11ddd5428c13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
