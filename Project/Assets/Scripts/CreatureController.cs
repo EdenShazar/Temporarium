@@ -25,6 +25,7 @@ public class CreatureController : MonoBehaviour
     new Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
     Transform spitPoint;
+    Transform gemDropPoint;
     Collider2D regularCollider;
     Collider2D eggCollider;
     SpriteRenderer carriableSpriteRenderer;
@@ -40,6 +41,7 @@ public class CreatureController : MonoBehaviour
     int deathType;
     float eggCollisionHeight;
     Sprite brickSprite;
+    
     bool isHoldingGem;
 
     bool IsPlayer { get => playerModule.enabled; }
@@ -63,9 +65,10 @@ public class CreatureController : MonoBehaviour
         regularCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spitPoint = transform.GetChild(0);
-        eggCollider = transform.GetChild(1).GetComponent<Collider2D>();
-        carriableSpriteRenderer = transform.GetChild(2).GetComponent<SpriteRenderer>();
-        gemLight = transform.GetChild(2).GetChild(0).GetComponent<Light2D>();
+        gemDropPoint = transform.GetChild(1);
+        eggCollider = transform.GetChild(2).GetComponent<Collider2D>();
+        carriableSpriteRenderer = transform.GetChild(3).GetComponent<SpriteRenderer>();
+        gemLight = transform.GetChild(3).GetChild(0).GetComponent<Light2D>();
 
         playerModule = new PlayerModule(transform: transform);
 
@@ -88,7 +91,8 @@ public class CreatureController : MonoBehaviour
         if (!gameObject.activeSelf)
             return;
 
-        if (!IsVisible(buffer: 0.2f))
+        float visibilityBuffer = IsPlayer ? 0 : 0.2f;
+        if (!IsVisible(visibilityBuffer))
             DisableInstance();
 
         movementModule.Update(GetAge());
@@ -336,6 +340,10 @@ public class CreatureController : MonoBehaviour
         UnsubscribeFromEvents();
         TurnIntoDeadBody();
         gameObject.SetActive(false);
+        
+        if (isHoldingGem)
+            GameManager.unheldGem.DropAtPosition(gemDropPoint.position);
+        GameManager.NotifyGemOwner(isPlayer: false);
 
         GameManager.NotifyDeactivatedPlayer();
     }
@@ -454,9 +462,10 @@ public class CreatureController : MonoBehaviour
     {
         carriableSpriteRenderer.enabled = true;
         carriableSpriteRenderer.sprite = gemSprite;
-        GameManager.gemHolder = transform;
+        GameManager.GemHolder = transform;
         gemLight.enabled = true;
         isHoldingGem = true;
+        GameManager.NotifyGemOwner(isPlayer: true);
     }
 
     void CarryNothing()

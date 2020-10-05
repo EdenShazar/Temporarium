@@ -110,7 +110,7 @@ public class GuardController : MonoBehaviour
             return;
         }
 
-        if (GameManager.player.transform == GameManager.gemHolder)
+        if (GameManager.player.transform == GameManager.GemHolder)
             EatPlayer();
     }
 
@@ -156,13 +156,14 @@ public class GuardController : MonoBehaviour
     {
         isHoldingGem = true;
         gem.color = Color.white;
-        GameManager.gemHolder = transform;
+        GameManager.GemHolder = transform;
+        GameManager.NotifyGemOwner(isPlayer: false);
     }
 
     void LoseGem()
     {
         isHoldingGem = false;
-        gem.color = Color.clear;
+        gem.color = Color.clear;        
     }
 
     #region Light methods

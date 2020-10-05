@@ -21,7 +21,7 @@ public class Altar : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform != GameManager.player.transform)
+        if (GameManager.player == null || other.transform != GameManager.player.transform)
             return;
 
         if (IsHoldingGem)
@@ -37,7 +37,8 @@ public class Altar : MonoBehaviour
         spriteRenderer.sprite = gemSprite;
         gemLight.enabled = true;
         IsHoldingGem = true;
-        GameManager.gemHolder = transform;
+        GameManager.GemHolder = transform;
+        GameManager.NotifyGemOwner(isPlayer: false);
     }
 
     public void LoseGem()
@@ -45,5 +46,6 @@ public class Altar : MonoBehaviour
         spriteRenderer.sprite = emptySprite;
         gemLight.enabled = false;
         IsHoldingGem = false;
+        GameManager.NotifyGemOwner(isPlayer: true);
     }
 }

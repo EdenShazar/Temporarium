@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,7 +8,19 @@ public class GameManager : MonoBehaviour
     new public static Camera camera;
     
     public static CreatureController player;
-    public static Transform gemHolder;
+
+    public static Gem unheldGem;
+    static Transform gemHolder;
+
+    public static Transform GemHolder
+    {
+        get => gemHolder;
+        set
+        {
+            gemHolder = value;
+            CameraController.GemCamera.Follow = gemHolder;
+        }
+    }
 
 #pragma warning disable CS0649
     [SerializeField] GameObject playerPrefab;
@@ -34,6 +47,7 @@ public class GameManager : MonoBehaviour
         EnsureSingleton();
 
         camera = Camera.main;
+        unheldGem = FindObjectOfType<Gem>();
 
         creatureInstances = new GameObject[Constants.maxCreatureInstances];
         bodyInstances = new GameObject[Constants.maxBodyInstances];
@@ -44,6 +58,19 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SearchForPlayer();
+
+        StartCoroutine(EnsureActiveCreatureInstances());
+    }
+
+    IEnumerator EnsureActiveCreatureInstances()
+    {
+        while (true)
+        {
+            CountActiveCreatures();
+            ReinstantiateCreatures();
+
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     void EnsureSingleton()
@@ -139,13 +166,7 @@ public class GameManager : MonoBehaviour
     public static void NotifyDisabledCreatureInstance()
     {
         activeCreatureCount--;
-        
-        while (activeCreatureCount < Constants.maxCreatureInstances / 2)
-        {
-            GameObject creature = GetFreeCreatureInstance();
-            PositionCreatureInstance(creature);
-            creature.GetComponent<CreatureController>().ActivateInstance();
-        }
+        ReinstantiateCreatures();
     }
 
     public static void NotifyDeactivatedPlayer()
@@ -168,16 +189,43 @@ public class GameManager : MonoBehaviour
         Debug.Log("Player has been activated!");
     }
 
+    public static void NotifyGemOwner(bool isPlayer)
+    {
+        if (isPlayer)
+            CameraController.ActivatePlayerCamera();
+        else
+            CameraController.ActivateGemCamera();
+
+    }
+
+    static void CountActiveCreatures()
+    {
+        activeCreatureCount = 0;
+
+        foreach (var creature in creatureInstances)
+            if (creature.activeSelf)
+                activeCreatureCount++;
+    }
+
+    static void ReinstantiateCreatures()
+    {
+        while (activeCreatureCount < Constants.maxCreatureInstances / 2)
+        {
+            GameObject creature = GetFreeCreatureInstance();
+            PositionCreatureInstance(creature);
+            creature.GetComponent<CreatureController>().ActivateInstance();
+            activeCreatureCount++;
+        }
+    }
+
     static void SearchForPlayer()
     {
         IsSearchingForPlayer = true;
-        CameraController.SearchForPlayer();
     }
 
     static void StopSearchingForPlayer()
     {
         IsSearchingForPlayer = false;
-        CameraController.StopSearchForPlayer();
     }
 
     static void PurgeNonVisibleObjects(GameObject[] array)
