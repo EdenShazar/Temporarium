@@ -16,30 +16,28 @@ public class CreatureController : MonoBehaviour
     [SerializeField] [Min(1)] float spitStrength = 2;
     [SerializeField] [Min(1)] float spitDistance = 3;
     [SerializeField] Sprite[] orderedDeathSprites;
-    [SerializeField] CreatureMovement movement;
+    [SerializeField] CreatureMovement movementModule;
 #pragma warning restore CS0649
 
     // References
     Animator animator;
     new Rigidbody2D rigidbody;
-    ScaleManager scaleManager;
+    SpriteRenderer spriteRenderer;
     Transform spitPoint;
     Collider2D regularCollider;
     Collider2D eggCollider;
 
+    PlayerModule playerModule;
+
     readonly Timer oldAgeTimer = new Timer();
     readonly Timer deathTimer = new Timer();
-
-    // Player-specific
-    PlayerController playerController;
     readonly Timer finalDeathTimer = new Timer();
-
-    // Nonplayer-specific
     readonly Timer hatchTimer = new Timer();
 
-    bool isPlayer;
     int deathType;
     float eggCollisionHeight;
+
+    bool IsPlayer { get => playerModule.enabled; }
 
     #region Animator hashes
 
@@ -57,18 +55,18 @@ public class CreatureController : MonoBehaviour
         animator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody2D>();
         regularCollider = GetComponent<Collider2D>();
-        scaleManager = FindObjectOfType<ScaleManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         spitPoint = transform.GetChild(0);
         eggCollider = transform.GetChild(1).GetComponent<Collider2D>();
 
-        isPlayer = TryGetComponent(out playerController);
+        playerModule = new PlayerModule(transform: transform);
 
         Func<float> getInputDirection;
-        if (isPlayer)
-            getInputDirection = () => playerController.MoveAngle;
+        if (IsPlayer)
+            getInputDirection = playerModule.GetMoveAngle;
         else
             getInputDirection = null;
-        movement.Initialize(lifespan, getInputDirection, transform);
+        movementModule.Initialize(lifespan, getInputDirection, transform);
 
         // Deactivate until needed
         gameObject.SetActive(false);
@@ -76,8 +74,16 @@ public class CreatureController : MonoBehaviour
 
     void Update()
     {
-        movement.Update(GetAge());
-        UpdateScale();
+        if (!IsVisible())
+            DisableInstance();
+
+        movementModule.Update(GetAge());
+    }
+
+    void OnMouseDown()
+    {
+        if (GameManager.IsSearchingForPlayer)
+            ConvertToPlayer();
     }
 
     public void ActivateInstance(float eggCollisionHeight = Mathf.NegativeInfinity)
@@ -88,6 +94,7 @@ public class CreatureController : MonoBehaviour
             this.eggCollisionHeight = eggCollisionHeight;
 
         gameObject.SetActive(true);
+        GameManager.NotifyEnabledCreatureInstance();
 
         InitializeTimers();
         SubscribeToEvents();
@@ -97,9 +104,37 @@ public class CreatureController : MonoBehaviour
         WaitToHatch();
     }
 
+    public void ConvertToPlayer()
+    {
+        if (GameManager.player != null)
+            return;
+
+        if (hatchTimer.Enabled)
+        {
+            hatchTimer.Stop();
+            WaitToHatch();
+        }
+
+        playerModule.enabled = true;
+        movementModule.NotifyConvertedToPlayer(playerModule.GetMoveAngle);
+        CameraController.SetFollowTarget(transform);
+
+        GameManager.NotifyActivatedPlayer();
+
+        Debug.Log("Converted to player!");
+    }
+
+    public void ConvertToNonPlayer()
+    {
+        playerModule.enabled = false;
+        movementModule.NotifyConvertedToNonPlayer();
+
+        GameManager.NotifyDisabledPlayer();
+    }
+
     void WaitToHatch()
     {
-        if (isPlayer)
+        if (IsPlayer)
             StartCoroutine(WaitForPlayerinputToHatch());
         else
             hatchTimer.Start();
@@ -109,8 +144,12 @@ public class CreatureController : MonoBehaviour
 
     IEnumerator WaitForPlayerinputToHatch()
     {
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        Hatch();
+        finalDeathTimer.Start();
+
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) || !gameObject.activeSelf);
+
+        if (gameObject.activeSelf)
+            Hatch();
     }
 
     IEnumerator StopAtEggCollisionHeight()
@@ -197,6 +236,7 @@ public class CreatureController : MonoBehaviour
         deathTimer.OnTick += BeginDeath;
         StateEventManager.OnLayEgg += LayEgg;
         StateEventManager.OnDeath += Die;
+        finalDeathTimer.OnTick += DisableInstance;
     }
 
     void InitializeAnimator()
@@ -215,15 +255,19 @@ public class CreatureController : MonoBehaviour
     void InitializeNewEgg(GameObject egg)
     {
         egg.SetActive(true);
+        CreatureController eggCreatureController = egg.GetComponent<CreatureController>();
 
         float angle;
-        if (isPlayer)
+        if (IsPlayer)
         {
-            angle = playerController.MoveAngle;
+            angle = playerModule.GetMoveAngle();
             CameraController.SetFollowTarget(egg.transform);
+
+            ConvertToNonPlayer();
+            eggCreatureController.ConvertToPlayer();
         }
         else
-            angle = UnityEngine.Random.Range(movement.MinAngle, movement.MaxAngle);
+            angle = UnityEngine.Random.Range(movementModule.MinAngle, movementModule.MaxAngle);
 
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         float upperAngle = (angle + 0.5f * Mathf.PI) / 2;
@@ -237,7 +281,7 @@ public class CreatureController : MonoBehaviour
         eggRigidbody.angularVelocity = UnityEngine.Random.Range(180, 720);
 
         float collisionHeight = (transform.position.ToVector2() + direction.normalized * spitDistance).y;
-        egg.GetComponent<CreatureController>().ActivateInstance(collisionHeight);
+        eggCreatureController.ActivateInstance(collisionHeight);
     }
 
     #endregion
@@ -249,6 +293,11 @@ public class CreatureController : MonoBehaviour
         StopTimers();
         UnsubscribeFromEvents();
         gameObject.SetActive(false);
+
+        if (IsPlayer)
+            GameManager.NotifyDisabledPlayer();
+        else
+            GameManager.NotifyDisabledCreatureInstance();
     }
 
     void UnsubscribeFromEvents()
@@ -280,13 +329,12 @@ public class CreatureController : MonoBehaviour
 
     GameObject GetNewEggGameObject()
     {
-        return isPlayer ? GameManager.GetFreePlayerInstance(forced: true) : GameManager.GetFreeCreatureInstance();
+        //return isPlayer ? GameManager.GetFreePlayerInstance(forced: true) : GameManager.GetFreeCreatureInstance();
+        return GameManager.GetFreeCreatureInstance();
     }
 
     void TurnIntoDeadBody()
     {
-        GameManager.FreeInstance(gameObject);
-
         GameObject body = GameManager.GetFreeBodyInstance();
 
         if (body == null)
@@ -298,12 +346,6 @@ public class CreatureController : MonoBehaviour
         SpriteRenderer spriteRenderer = body.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = orderedDeathSprites[deathType];
         spriteRenderer.color = GetComponent<SpriteRenderer>().color;
-    }
-
-    void UpdateScale()
-    {
-        float targetScale = scaleManager.GetTargetScale(transform.position);
-        transform.localScale = new Vector3(targetScale, targetScale, 1f);
     }
 
     void DeactivateEggMode()
@@ -327,6 +369,19 @@ public class CreatureController : MonoBehaviour
         rigidbody.gravityScale = 1;
     }
 
+    bool IsVisible()
+    {
+        Vector2 point = GameManager.camera.WorldToScreenPoint(spriteRenderer.bounds.min);
+        if (point.x > GameManager.camera.pixelWidth || point.y > GameManager.camera.pixelHeight)
+            return false;
+
+        point = GameManager.camera.WorldToScreenPoint(spriteRenderer.bounds.max);
+        if (point.x < 0 || point.y < 0)
+            return false;
+
+        return true;
+    }
+
     #endregion
 
     #region Gizmos
@@ -334,11 +389,11 @@ public class CreatureController : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
-        Vector3 minVector = new Vector3(Mathf.Cos(movement.MinAngle), Mathf.Sin(movement.MinAngle), 0);
+        Vector3 minVector = new Vector3(Mathf.Cos(movementModule.MinAngle), Mathf.Sin(movementModule.MinAngle), 0);
         Gizmos.DrawLine(transform.position, transform.position + minVector);
 
         Gizmos.color = Color.magenta;
-        Vector3 maxVector = new Vector3(Mathf.Cos(movement.MaxAngle), Mathf.Sin(movement.MaxAngle), 0);
+        Vector3 maxVector = new Vector3(Mathf.Cos(movementModule.MaxAngle), Mathf.Sin(movementModule.MaxAngle), 0);
         Gizmos.DrawLine(transform.position, transform.position + maxVector);
     }
 
