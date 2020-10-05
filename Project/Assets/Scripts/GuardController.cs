@@ -110,7 +110,8 @@ public class GuardController : MonoBehaviour
             return;
         }
 
-        EatPlayer();
+        if (GameManager.GemHolder == PlayerModule.CurrentPlayer.transform)
+            EatPlayer();
     }
 
     void ReturnGemToAltar()

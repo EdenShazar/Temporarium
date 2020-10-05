@@ -55,19 +55,10 @@ public class PlayerModule
         CurrentPlayer = newPlayer;
         IsCurrentPlayerHoldingGem = withGem;
 
+        appointer.ConvertToNonPlayer();
+        newPlayer.ConvertToPlayer();
 
-        if (withGem)
-        {
-            RecordLostGem(loser: appointer.transform);
-            newPlayer.ConvertToPlayer();
-            RecordTakenGem(taker: newPlayer.transform);
-            appointer.ConvertToNonPlayer();
-        }
-        else
-        { 
-            newPlayer.ConvertToPlayer();
-            appointer.ConvertToNonPlayer();
-        }
+        newPlayer.TryTakeGemFrom(from: appointer.transform);
 
         return true;
     }
