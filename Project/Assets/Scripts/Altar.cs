@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Altar : MonoBehaviour
 {
@@ -8,23 +9,41 @@ public class Altar : MonoBehaviour
 #pragma warning restore CS0649
 
     SpriteRenderer spriteRenderer;
-    GemHolder gemHolder;
+    Light2D gemLight;
+
+    public bool IsHoldingGem { get; private set; }
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        gemHolder = GetComponent<GemHolder>();
+        gemLight = transform.GetChild(0).GetComponent<Light2D>();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform != GameManager.player.transform)
+            return;
+
+        if (IsHoldingGem)
+        {
+            LoseGem();
+            GameManager.player.CarryGem();
+            return;
+        }
     }
 
     public void StoreGem()
     {
         spriteRenderer.sprite = gemSprite;
-        gemHolder.isHoldingGem = true;
+        gemLight.enabled = true;
+        IsHoldingGem = true;
+        GameManager.gemHolder = transform;
     }
 
-    public void RemoveGem()
+    public void LoseGem()
     {
         spriteRenderer.sprite = emptySprite;
-        gemHolder.isHoldingGem = false;
+        gemLight.enabled = false;
+        IsHoldingGem = false;
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
 public class CreatureController : MonoBehaviour
 {
-    // Inspector fields
 #pragma warning disable CS0649
     [SerializeField] [Min(1)] float lifespan = 5;
     [SerializeField] [Range(0.1f, 0.9f)] float oldAgeFactor = 0.5f;
@@ -21,7 +21,6 @@ public class CreatureController : MonoBehaviour
     [SerializeField] CreatureMovement movementModule;
 #pragma warning restore CS0649
 
-    // References
     Animator animator;
     new Rigidbody2D rigidbody;
     SpriteRenderer spriteRenderer;
@@ -29,6 +28,7 @@ public class CreatureController : MonoBehaviour
     Collider2D regularCollider;
     Collider2D eggCollider;
     SpriteRenderer carriableSpriteRenderer;
+    Light2D gemLight;
 
     PlayerModule playerModule;
 
@@ -40,8 +40,10 @@ public class CreatureController : MonoBehaviour
     int deathType;
     float eggCollisionHeight;
     Sprite brickSprite;
+    bool isHoldingGem;
 
     bool IsPlayer { get => playerModule.enabled; }
+    public bool IsSpottable { get; private set; }
 
     #region Animator hashes
 
@@ -63,6 +65,7 @@ public class CreatureController : MonoBehaviour
         spitPoint = transform.GetChild(0);
         eggCollider = transform.GetChild(1).GetComponent<Collider2D>();
         carriableSpriteRenderer = transform.GetChild(2).GetComponent<SpriteRenderer>();
+        gemLight = transform.GetChild(2).GetChild(0).GetComponent<Light2D>();
 
         playerModule = new PlayerModule(transform: transform);
 
@@ -84,6 +87,9 @@ public class CreatureController : MonoBehaviour
     {
         if (!IsVisible())
             DisableInstance();
+
+        // Hard counter to player not carrying gem across generations
+        CarryItem();
 
         movementModule.Update(GetAge());
     }
@@ -109,7 +115,8 @@ public class CreatureController : MonoBehaviour
         InitializeAnimator();
         ActivateEggMode();
 
-        CarryBrick();
+        CarryItem();
+
         WaitToHatch();
     }
 
@@ -119,9 +126,11 @@ public class CreatureController : MonoBehaviour
             return;
 
         playerModule.enabled = true;
-        gameObject.layer = Constants.playerLayer;
 
-        StopCarry();
+        if (isHoldingGem)
+            CarryGem();
+        else
+            CarryNothing();
 
         if (hatchTimer.Enabled)
         {
@@ -132,7 +141,7 @@ public class CreatureController : MonoBehaviour
         movementModule.NotifyConvertedToPlayer(playerModule.GetMoveAngle);
         CameraController.SetFollowTarget(transform);
 
-        GameManager.NotifyActivatedPlayer();
+        GameManager.NotifyActivatedPlayer(newPlayer: this);
 
         Debug.Log("Converted to player!");
     }
@@ -142,7 +151,6 @@ public class CreatureController : MonoBehaviour
         CarryBrick();
 
         playerModule.enabled = false;
-        gameObject.layer = Constants.creaturesLayer;
         movementModule.NotifyConvertedToNonPlayer();
 
         GameManager.NotifyDeactivatedPlayer();
@@ -215,7 +223,7 @@ public class CreatureController : MonoBehaviour
         if (gameObjectID != gameObject.GetInstanceID())
             return;
 
-        GameObject egg = GetNewEggGameObject();
+        GameObject egg = GameManager.GetFreeCreatureInstance();
 
         if (egg == null)
             return;
@@ -281,8 +289,11 @@ public class CreatureController : MonoBehaviour
         float angle;
         if (IsPlayer)
         {
-            angle = playerModule.GetMoveAngle();
+            angle = movementModule.GetPlayerMoveDirection().GetAngleRad();
             CameraController.SetFollowTarget(egg.transform);
+
+            if (isHoldingGem)
+                eggCreatureController.isHoldingGem = true;
 
             ConvertToNonPlayer();
             eggCreatureController.ConvertToPlayer();
@@ -319,7 +330,17 @@ public class CreatureController : MonoBehaviour
             GameManager.NotifyDisabledCreatureInstance();
     }
 
-    void DisablePlayerOnFinalDeath()
+    public void DisablePlayerOnFinalDeath()
+    {
+        StopTimers();
+        UnsubscribeFromEvents();
+        TurnIntoDeadBody();
+        gameObject.SetActive(false);
+
+        GameManager.NotifyDeactivatedPlayer();
+    }
+
+    public void Eaten()
     {
         StopTimers();
         UnsubscribeFromEvents();
@@ -336,6 +357,7 @@ public class CreatureController : MonoBehaviour
         deathTimer.OnTick -= BeginDeath;
         StateEventManager.OnLayEgg -= LayEgg;
         StateEventManager.OnDeath -= Die;
+        finalDeathTimer.OnTick -= DisablePlayerOnFinalDeath;
     }
 
     #endregion
@@ -353,12 +375,6 @@ public class CreatureController : MonoBehaviour
     float GetAge()
     {
         return animator.GetBool(oldHash) ? oldAgeFactor * lifespan + deathTimer.ElapsedTime : oldAgeTimer.ElapsedTime;
-    }
-
-    GameObject GetNewEggGameObject()
-    {
-        //return isPlayer ? GameManager.GetFreePlayerInstance(forced: true) : GameManager.GetFreeCreatureInstance();
-        return GameManager.GetFreeCreatureInstance();
     }
 
     void TurnIntoDeadBody()
@@ -381,12 +397,14 @@ public class CreatureController : MonoBehaviour
         regularCollider.enabled = true;
         eggCollider.enabled = false;
 
-        gameObject.layer = Constants.creaturesLayer;
+        gameObject.layer = IsPlayer ? Constants.playerLayer : Constants.creaturesLayer;
         transform.rotation = Quaternion.identity;
         rigidbody.gravityScale = 0;
         rigidbody.velocity = Vector2.zero;
         rigidbody.angularVelocity = 0;
         rigidbody.freezeRotation = true;
+
+        IsSpottable = isHoldingGem;
     }
 
     void ActivateEggMode()
@@ -397,6 +415,8 @@ public class CreatureController : MonoBehaviour
         gameObject.layer = Constants.eggLayer;
         rigidbody.gravityScale = 1;
         rigidbody.freezeRotation = false;
+
+        IsSpottable = false;
     }
 
     bool IsVisible()
@@ -412,21 +432,38 @@ public class CreatureController : MonoBehaviour
         return true;
     }
 
+    void CarryItem()
+    {
+        if (!IsPlayer)
+            CarryBrick();
+        else if (isHoldingGem)
+            CarryGem();
+        else
+            CarryNothing();
+    }
+
     void CarryBrick()
     {
         carriableSpriteRenderer.enabled = true;
         carriableSpriteRenderer.sprite = brickSprite;
+        gemLight.enabled = false;
+        isHoldingGem = false;
     }
 
-    void CarryGem()
+    public void CarryGem()
     {
         carriableSpriteRenderer.enabled = true;
         carriableSpriteRenderer.sprite = gemSprite;
+        GameManager.gemHolder = transform;
+        gemLight.enabled = true;
+        isHoldingGem = true;
     }
 
-    void StopCarry()
+    void CarryNothing()
     {
         carriableSpriteRenderer.enabled = false;
+        gemLight.enabled = false;
+        isHoldingGem = false;
     }
 
     #endregion

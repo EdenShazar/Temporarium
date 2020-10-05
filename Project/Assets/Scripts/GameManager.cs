@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     new public static Camera camera;
     
-    public static PlayerModule player;
+    public static CreatureController player;
+    public static Transform gemHolder;
+    //public static Gem UnheldGem { get; private set; }
 
 #pragma warning disable CS0649
     [SerializeField] GameObject playerPrefab;
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
         EnsureSingleton();
 
         camera = Camera.main;
+
+        //UnheldGem = FindObjectOfType<Gem>();
 
         creatureInstances = new GameObject[Constants.maxCreatureInstances];
         bodyInstances = new GameObject[Constants.maxBodyInstances];
@@ -169,14 +173,18 @@ public class GameManager : MonoBehaviour
 
     public static void NotifyDeactivatedPlayer()
     {
+        player = null;
+
         NotifyDisabledCreatureInstance();
         SearchForPlayer();
 
         Debug.Log("Player has been deactivated!");
     }
 
-    public static void NotifyActivatedPlayer()
+    public static void NotifyActivatedPlayer(CreatureController newPlayer)
     {
+        player = newPlayer;
+
         NotifyEnabledCreatureInstance();
         StopSearchingForPlayer();
 

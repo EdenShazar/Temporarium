@@ -98,7 +98,7 @@ public class CreatureMovement
         return new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
-    Vector2 GetPlayerMoveDirection()
+    public Vector2 GetPlayerMoveDirection()
     {
         float angle = getInputAngle();
         angle = angle.ClampAngleRad(minAngle, maxAngle);
