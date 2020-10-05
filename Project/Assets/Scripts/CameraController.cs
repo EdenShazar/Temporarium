@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    static CinemachineVirtualCamera playerCamera;
-    static CinemachineVirtualCamera searchCamera;
+    public static CinemachineVirtualCamera PlayerCamera { get; private set; }
+    public static CinemachineVirtualCamera GemCamera { get; private set; }
 
     const int activeCameraPriority = 20;
     const int inactiveCameraPriority = 10;
@@ -13,24 +13,26 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         CinemachineVirtualCamera[] cameras = FindObjectsOfType<CinemachineVirtualCamera>();
-        playerCamera = cameras.Single(cam => cam.name == "Player camera");
-        searchCamera = cameras.Single(cam => cam.name == "Search camera");
+        PlayerCamera = cameras.Single(cam => cam.name == "Player camera");
+        GemCamera = cameras.Single(cam => cam.name == "Search camera");
     }
 
     public static void SetFollowTarget(Transform target)
     {
-        playerCamera.Follow = target;
+        PlayerCamera.Follow = target;
     }
 
-    public static void SearchForPlayer()
+    public static void ActivateGemCamera()
     {
-        playerCamera.Priority = inactiveCameraPriority;
-        searchCamera.Priority = activeCameraPriority;
+        PlayerCamera.Priority = inactiveCameraPriority;
+        GemCamera.Priority = activeCameraPriority;
+
+        GemCamera.Follow = GameManager.GemHolder;
     }
 
-    public static void StopSearchForPlayer()
+    public static void ActivatePlayerCamera()
     {
-        playerCamera.Priority = activeCameraPriority;
-        searchCamera.Priority = inactiveCameraPriority;
+        PlayerCamera.Priority = activeCameraPriority;
+        GemCamera.Priority = inactiveCameraPriority;
     }
 }

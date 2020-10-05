@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2178560850597934436}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4855092299219030922
 CircleCollider2D:
@@ -47,6 +47,36 @@ CircleCollider2D:
   m_Offset: {x: 0.06597018, y: 1.2783077}
   serializedVersion: 2
   m_Radius: 1.7321253
+--- !u!1 &530414937834794646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5961348007522115839}
+  m_Layer: 9
+  m_Name: Gem drop point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5961348007522115839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530414937834794646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2, y: -0.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2178560850597934436}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2178560850597934434
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +88,7 @@ GameObject:
   - component: {fileID: 2178560850597934436}
   - component: {fileID: 2178560850597934437}
   - component: {fileID: 2178560850597934439}
-  - component: {fileID: 4192078894522089014}
+  - component: {fileID: 8654692536838521211}
   - component: {fileID: 2178560850597934457}
   - component: {fileID: 2301064847564935422}
   m_Layer: 9
@@ -80,6 +110,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6132005506069799196}
+  - {fileID: 5961348007522115839}
   - {fileID: 2870862698750237637}
   - {fileID: 3084755843702546138}
   - {fileID: 2149775311944031521}
@@ -220,12 +251,12 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    maxSpeed: 1
+    maxSpeed: 1.5
     franticness: 3
     minAngle: -1.47
     maxAngle: 0.84
---- !u!61 &4192078894522089014
-BoxCollider2D:
+--- !u!58 &8654692536838521211
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -237,19 +268,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.63511324, y: 0.11712241}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5238804, y: 0.14077584}
-    oldSize: {x: 3.93, y: 2.8}
-    newSize: {x: 0.84, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.5738383, y: 0.20905733}
   serializedVersion: 2
-  m_Size: {x: 2.2347226, y: 1.0225892}
-  m_EdgeRadius: 0
+  m_Radius: 0.5655922
 --- !u!50 &2178560850597934457
 Rigidbody2D:
   serializedVersion: 4
@@ -319,7 +340,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2178560850597934436}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3537791907090383627
 SpriteRenderer:
@@ -401,7 +422,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2178560850597934436}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &8231956678449747799
 PolygonCollider2D:
@@ -609,7 +630,7 @@ Transform:
   m_Children:
   - {fileID: 1203470312082649939}
   m_Father: {fileID: 2178560850597934436}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.428}
 --- !u!212 &8739731317018110845
 SpriteRenderer:
