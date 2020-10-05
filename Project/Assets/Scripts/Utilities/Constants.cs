@@ -2,7 +2,7 @@
 
 public static class Constants
 {
-    public static readonly int maxCreatureInstances = 7;
+    public static readonly int maxCreatureInstances = 10;
     public static readonly int maxBodyInstances = 30;
 
     public static readonly int defaultLayer = LayerMask.NameToLayer("Default");

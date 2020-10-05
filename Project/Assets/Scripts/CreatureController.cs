@@ -85,11 +85,11 @@ public class CreatureController : MonoBehaviour
 
     void Update()
     {
-        if (!IsVisible())
-            DisableInstance();
+        if (!gameObject.activeSelf)
+            return;
 
-        // Hard counter to player not carrying gem across generations
-        CarryItem();
+        if (!IsVisible(buffer: 0.2f))
+            DisableInstance();
 
         movementModule.Update(GetAge());
     }
@@ -419,14 +419,14 @@ public class CreatureController : MonoBehaviour
         IsSpottable = false;
     }
 
-    bool IsVisible()
+    public bool IsVisible(float buffer = 0)
     {
-        Vector2 point = GameManager.camera.WorldToScreenPoint(spriteRenderer.bounds.min);
-        if (point.x > GameManager.camera.pixelWidth || point.y > GameManager.camera.pixelHeight)
+        Vector2 point = GameManager.camera.WorldToViewportPoint(spriteRenderer.bounds.min);
+        if (point.x > 1 + buffer || point.y > 1 + buffer)
             return false;
 
-        point = GameManager.camera.WorldToScreenPoint(spriteRenderer.bounds.max);
-        if (point.x < 0 || point.y < 0)
+        point = GameManager.camera.WorldToViewportPoint(spriteRenderer.bounds.max);
+        if (point.x < -buffer || point.y < -buffer)
             return false;
 
         return true;

@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour
     
     public static CreatureController player;
     public static Transform gemHolder;
-    //public static Gem UnheldGem { get; private set; }
 
 #pragma warning disable CS0649
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject creaturePrefab;
     [SerializeField] GameObject bodyPrefab;
     [SerializeField] Transform creatureParent;
+    [SerializeField] Collider2D backgroundCollider;
 #pragma warning restore CS0649
 
     static GameObject[] creatureInstances;
@@ -24,11 +24,8 @@ public class GameManager : MonoBehaviour
     public GameObject CreaturePrefab { get => creaturePrefab; }
     public Transform CreatureParent { get => creatureParent; }
 
-    static Collider2D[] overlappingColliders = new Collider2D[0];
-    static ContactFilter2D noContactFiler = new ContactFilter2D();
-
     static int activeCreatureCount = 0;
-    const float creatureScreenBuffer = 0.1f;
+    const float creatureScreenBuffer = 0.2f;
 
     public static bool IsSearchingForPlayer { get; private set; }
 
@@ -38,12 +35,8 @@ public class GameManager : MonoBehaviour
 
         camera = Camera.main;
 
-        //UnheldGem = FindObjectOfType<Gem>();
-
         creatureInstances = new GameObject[Constants.maxCreatureInstances];
         bodyInstances = new GameObject[Constants.maxBodyInstances];
-
-        noContactFiler.NoFilter();
 
         PopulateInstanceArrays();
     }
@@ -66,36 +59,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    static void PositionCreatureInstance(GameObject creature, bool outsideScreenTopLeft = false)
+    static void PositionCreatureInstance(GameObject creature)
     {
-        //Vector2 creaturePosition = camera.ScreenToWorldPoint(new Vector3(x, y, 0)).ToVector2();
-
-        //GameObject newCreature = Instantiate(creaturePrefab, creaturePosition, Quaternion.identity, creatureParent);
-        Collider2D collider = creature.GetComponent<Collider2D>();
-
         bool validLocation = false;
         while (!validLocation)
         {
-            float x;
-            float y;
-            if (outsideScreenTopLeft)
-            {
-                x = Random.Range(-camera.pixelWidth * creatureScreenBuffer, camera.pixelWidth);
-                y = Random.Range(0, camera.pixelHeight * (1 + creatureScreenBuffer));
-            }
-            else
-            {
-                x = Random.Range(0, camera.pixelWidth);
-                y = Random.Range(0, camera.pixelHeight);
-            }
+            float x = Random.Range(-creatureScreenBuffer * 2, 1);
+            float y = Random.Range(0, 1 + creatureScreenBuffer * 2);
 
-            Vector3 newPosition = camera.ScreenToWorldPoint(new Vector3(x, y, 0));
+            Vector3 newPosition = camera.ViewportToWorldPoint(new Vector3(x, y, 0));
             newPosition.z = 0;
             creature.transform.position = newPosition;
 
-            //validLocation = (!outsideScreenTopLeft || x < 0 || y > camera.pixelHeight) &&
-            //    collider.OverlapCollider(noContactFiler, overlappingColliders) == 0;
-            validLocation = collider.OverlapCollider(noContactFiler, overlappingColliders) == 0;
+            validLocation = !creature.GetComponent<CreatureController>().IsVisible() &&
+                Physics2D.OverlapPoint(creature.transform.position, LayerMask.GetMask("Default")) == null;
         }
     }
 
@@ -166,7 +143,7 @@ public class GameManager : MonoBehaviour
         while (activeCreatureCount < Constants.maxCreatureInstances / 2)
         {
             GameObject creature = GetFreeCreatureInstance();
-            PositionCreatureInstance(creature, outsideScreenTopLeft: true);
+            PositionCreatureInstance(creature);
             creature.GetComponent<CreatureController>().ActivateInstance();
         }
     }
