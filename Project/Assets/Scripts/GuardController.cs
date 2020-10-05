@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
@@ -23,7 +25,7 @@ public class GuardController : MonoBehaviour
     [SerializeField] float theta = 0f;
     [SerializeField] float scanSpeed = 30f;
     [SerializeField] float scanWidth = 70f;
-    [SerializeField] [Range(0f, 1f)] float maxSpotlightIntensity = 0.5f;
+    [SerializeField] [Range(0f, 1f)] float maxSpotlightScaling = 0.5f;
     [SerializeField] [Range(0f, 1f)] float secondarySpotlightSpeed = 0.02f;
     [SerializeField] [Min(1)] int gizmoResolution = 30;
 #pragma warning restore CS0649
@@ -33,6 +35,14 @@ public class GuardController : MonoBehaviour
     float wideSpotlightBaseIntensity;
     float mediumSpotlightBaseIntensity;
     float narrowSpotlightBaseIntensity;
+
+    float wideSpotlightBaseOuterRadius;
+    float mediumSpotlightBaseOuterRadius;
+    float narrowSpotlightBaseOuterRadius;
+
+    float wideSpotlightBaseInnerRadius;
+    float mediumSpotlightBaseInnerRadius;
+    float narrowSpotlightBaseInnerRadius;
 
     #region Animator hashes
 
@@ -45,14 +55,23 @@ public class GuardController : MonoBehaviour
         animator = GetComponent<Animator>();
         gem = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
-        Light2D[] spotlights = GetComponentsInChildren<Light2D>();
-        wideSpotlight = spotlights.Single(light => light.name == "Wide spotlight");
-        mediumSpotlight = spotlights.Single(light => light.name == "Medium spotlight");
-        narrowSpotlight = spotlights.Single(light => light.name == "Narrow spotlight");
+        Light2D[] lights = GetComponentsInChildren<Light2D>();
+        wideSpotlight = lights.Single(light => light.name == "Wide spotlight");
+        mediumSpotlight = lights.Single(light => light.name == "Medium spotlight");
+        narrowSpotlight = lights.Single(light => light.name == "Narrow spotlight");
 
         wideSpotlightBaseIntensity = wideSpotlight.intensity;
         mediumSpotlightBaseIntensity = mediumSpotlight.intensity;
         narrowSpotlightBaseIntensity = narrowSpotlight.intensity;
+
+        wideSpotlightBaseInnerRadius = wideSpotlight.pointLightInnerRadius;
+        mediumSpotlightBaseInnerRadius = mediumSpotlight.pointLightInnerRadius;
+        narrowSpotlightBaseInnerRadius = narrowSpotlight.pointLightInnerRadius;
+
+        wideSpotlightBaseOuterRadius = wideSpotlight.pointLightOuterRadius;
+        mediumSpotlightBaseOuterRadius = mediumSpotlight.pointLightOuterRadius;
+        narrowSpotlightBaseOuterRadius = narrowSpotlight.pointLightOuterRadius;
+
 
         Random.InitState(seed: System.DateTime.Now.Millisecond);
         scanlineAngle = Random.Range(-180f, 180f);
@@ -65,7 +84,7 @@ public class GuardController : MonoBehaviour
     void Update()
     {
         AdvanceScanline();
-        UpdateSpotlights();
+        UpdateLights();
 
         if (isHoldingGem)
         {
@@ -146,41 +165,47 @@ public class GuardController : MonoBehaviour
         gem.color = Color.clear;
     }
 
-    #region Spotlight methods
+    #region Light methods
 
     void AdvanceScanline()
     {
         scanlineAngle = (scanlineAngle + scanSpeed * Time.deltaTime).WrapAngleDeg();
 
 #if UNITY_EDITOR
-        Debug.DrawLine(transform.position, PointAtAngleDeg(scanlineAngle - scanWidth / 2f));
-        Debug.DrawLine(transform.position, PointAtAngleDeg(scanlineAngle + scanWidth / 2f));
+        Debug.DrawLine(transform.position, WorldPointAtAngleDeg(scanlineAngle - scanWidth / 2f));
+        Debug.DrawLine(transform.position, WorldPointAtAngleDeg(scanlineAngle + scanWidth / 2f));
 #endif
     }
 
-    void UpdateSpotlights()
+    void UpdateLights()
     {
-        float desiredAngle = (narrowSpotlight.transform.position.ToVector2() - PointAtAngleDeg(scanlineAngle)).GetAngleDeg() + 90;
-        float intensityFactor = Mathf.Sin(-scanlineAngle * Mathf.Deg2Rad);
+        float desiredAngle = (narrowSpotlight.transform.position.ToVector2() - WorldPointAtAngleDeg(scanlineAngle)).GetAngleDeg() + 90;
+        float factor = Mathf.Sin(-scanlineAngle * Mathf.Deg2Rad) * maxSpotlightScaling + 1;
 
-        // Narrow
+        // Narrow spotlight
         narrowSpotlight.transform.rotation = Quaternion.Euler(0, 0, desiredAngle);
 
-        narrowSpotlight.intensity = (intensityFactor * maxSpotlightIntensity + 1) * narrowSpotlightBaseIntensity;
+        narrowSpotlight.intensity = factor * narrowSpotlightBaseIntensity;
+        narrowSpotlight.pointLightInnerRadius = factor * narrowSpotlightBaseInnerRadius;
+        narrowSpotlight.pointLightOuterRadius = factor * narrowSpotlightBaseOuterRadius;
 
-        // Medium
+        // Medium spotlight
         float currentMediumSpotlightAngle = mediumSpotlight.transform.rotation.eulerAngles.z;
         float newMediumSpotlightAngle = Mathf.LerpAngle(currentMediumSpotlightAngle, desiredAngle, secondarySpotlightSpeed * 2);
         mediumSpotlight.transform.rotation = Quaternion.Euler(0, 0, newMediumSpotlightAngle);
 
-        mediumSpotlight.intensity = (intensityFactor * maxSpotlightIntensity + 1) * mediumSpotlightBaseIntensity;
+        mediumSpotlight.intensity = factor * mediumSpotlightBaseIntensity;
+        mediumSpotlight.pointLightInnerRadius = factor * mediumSpotlightBaseInnerRadius;
+        mediumSpotlight.pointLightOuterRadius = factor * mediumSpotlightBaseOuterRadius;
 
-        // Wide
+        // Wide spotlight
         float currentWideSpotlightAngle = wideSpotlight.transform.rotation.eulerAngles.z;
         float newWideSpotlightAngle = Mathf.LerpAngle(currentWideSpotlightAngle, desiredAngle, secondarySpotlightSpeed);
         wideSpotlight.transform.rotation = Quaternion.Euler(0, 0, newWideSpotlightAngle);
 
-        wideSpotlight.intensity = (intensityFactor * maxSpotlightIntensity + 1) * wideSpotlightBaseIntensity;
+        wideSpotlight.intensity = factor * wideSpotlightBaseIntensity;
+        wideSpotlight.pointLightInnerRadius = factor * wideSpotlightBaseInnerRadius;
+        wideSpotlight.pointLightOuterRadius = factor * wideSpotlightBaseOuterRadius;
     }
 
     // https://math.stackexchange.com/questions/76457/check-if-a-point-is-within-an-ellipse
@@ -211,7 +236,7 @@ public class GuardController : MonoBehaviour
         return angleToPlayer >= scanWidth - scanWidth / 2 && angleToPlayer <= scanWidth + scanWidth / 2;
     }
 
-    Vector2 PointAtAngleDeg(float angle)
+    Vector2 WorldPointAtAngleDeg(float angle)
     {
         return new Vector2(
             transform.position.x + rX * Mathf.Cos(angle * Mathf.Deg2Rad),
@@ -219,7 +244,7 @@ public class GuardController : MonoBehaviour
             );
     }
 
-    Vector2 PointAtAngleRad(float angle)
+    Vector2 WorldPointAtAngleRad(float angle)
     {
         return new Vector2(
             transform.position.x + rX * Mathf.Cos(angle),
@@ -227,7 +252,17 @@ public class GuardController : MonoBehaviour
             );
     }
 
-#endregion
+    Vector2 LocalPointAtAngleDeg(float angle)
+    {
+        return new Vector2(rX * Mathf.Cos(angle * Mathf.Deg2Rad), rY * Mathf.Sin(angle * Mathf.Deg2Rad));
+    }
+
+    Vector2 LocalPointAtAngleRad(float angle)
+    {
+        return new Vector2(rX * Mathf.Cos(angle), rY * Mathf.Sin(angle));
+    }
+
+    #endregion
 
     #region Gizmo
 

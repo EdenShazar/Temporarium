@@ -58,7 +58,7 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 8.950003
   m_PointLightOuterAngle: 37.54
-  m_PointLightInnerRadius: 0
+  m_PointLightInnerRadius: 4.3197703
   m_PointLightOuterRadius: 11.52
   m_PointLightDistance: 3
   m_PointLightQuality: 1
@@ -107,7 +107,6 @@ Transform:
   - {fileID: 3782312921537962337}
   - {fileID: 7314283733270725611}
   - {fileID: 4355556513184803700}
-  - {fileID: 4946589188937562492}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -201,7 +200,7 @@ MonoBehaviour:
   theta: 0
   scanSpeed: 30
   scanWidth: 70
-  maxSpotlightIntensity: 0.85
+  maxSpotlightScaling: 0.5
   secondarySpotlightSpeed: 0.02
   gizmoResolution: 30
 --- !u!58 &3468441501509930810
@@ -220,7 +219,7 @@ CircleCollider2D:
   m_Offset: {x: 0.15295124, y: 0.31349945}
   serializedVersion: 2
   m_Radius: 1.1424055
---- !u!1 &4535423862747465875
+--- !u!1 &3994642088030492792
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,36 +227,36 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4946589188937562492}
-  - component: {fileID: 8561739058984896022}
-  m_Layer: 0
-  m_Name: Head point light
+  - component: {fileID: 2269633809177866482}
+  - component: {fileID: 8028744664179991350}
+  m_Layer: 12
+  m_Name: Gem light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4946589188937562492
+--- !u!4 &2269633809177866482
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535423862747465875}
-  m_LocalRotation: {x: -0, y: 0, z: -0.12931128, w: 0.9916041}
-  m_LocalPosition: {x: 0, y: 7.05, z: 0}
+  m_GameObject: {fileID: 3994642088030492792}
+  m_LocalRotation: {x: -0, y: -0, z: 0.8292827, w: 0.5588294}
+  m_LocalPosition: {x: 0, y: 0.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 840840333166929159}
-  m_RootOrder: 4
+  m_Father: {fileID: 6207981662793233477}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8561739058984896022
+--- !u!114 &8028744664179991350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535423862747465875}
+  m_GameObject: {fileID: 3994642088030492792}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -266,10 +265,10 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.4528302, g: 0.078604475, b: 0.078604475, a: 1}
-  m_Intensity: 5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 2
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 8349d2e700000000c376c45f
+  m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -278,8 +277,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2.3839211
+  m_PointLightInnerRadius: 0.43855846
+  m_PointLightOuterRadius: 1.7966408
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -464,7 +463,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.5735764, w: 0.8191521}
   m_LocalPosition: {x: -1.61, y: 2.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2269633809177866482}
   m_Father: {fileID: 840840333166929159}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 66.987946}
