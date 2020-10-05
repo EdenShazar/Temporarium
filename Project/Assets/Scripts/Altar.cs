@@ -21,24 +21,21 @@ public class Altar : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (GameManager.player == null || other.transform != GameManager.player.transform)
+        if (PlayerModule.CurrentPlayer == null || other.transform != PlayerModule.CurrentPlayer.transform)
             return;
 
-        if (IsHoldingGem)
-        {
+        if (IsHoldingGem && PlayerModule.CurrentPlayer.TryTakeGemFrom(transform))
             LoseGem();
-            GameManager.player.CarryGem();
-            return;
-        }
     }
 
-    public void StoreGem()
+    public void StoreGem(Transform from)
     {
+        if (!GameManager.TakeGemFrom(from, taker: transform))
+            return;
+
         spriteRenderer.sprite = gemSprite;
         gemLight.enabled = true;
         IsHoldingGem = true;
-        GameManager.GemHolder = transform;
-        GameManager.NotifyGemOwner(isPlayer: false);
     }
 
     public void LoseGem()
@@ -46,6 +43,5 @@ public class Altar : MonoBehaviour
         spriteRenderer.sprite = emptySprite;
         gemLight.enabled = false;
         IsHoldingGem = false;
-        GameManager.NotifyGemOwner(isPlayer: true);
     }
 }

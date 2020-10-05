@@ -14,20 +14,23 @@ public class CameraController : MonoBehaviour
     {
         CinemachineVirtualCamera[] cameras = FindObjectsOfType<CinemachineVirtualCamera>();
         PlayerCamera = cameras.Single(cam => cam.name == "Player camera");
-        GemCamera = cameras.Single(cam => cam.name == "Search camera");
+        GemCamera = cameras.Single(cam => cam.name == "Gem camera");
     }
 
-    public static void SetFollowTarget(Transform target)
+    void Update()
     {
-        PlayerCamera.Follow = target;
+        if (GameManager.GemHolder != null)
+            GemCamera.Follow = GameManager.GemHolder;
+
+        if (PlayerModule.CurrentPlayer != null)
+            PlayerCamera.Follow = PlayerModule.CurrentPlayer.transform;
     }
+
 
     public static void ActivateGemCamera()
     {
         PlayerCamera.Priority = inactiveCameraPriority;
         GemCamera.Priority = activeCameraPriority;
-
-        GemCamera.Follow = GameManager.GemHolder;
     }
 
     public static void ActivatePlayerCamera()

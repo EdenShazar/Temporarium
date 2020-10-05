@@ -14,8 +14,8 @@ public class CreatureMovement
 #pragma warning restore CS0649
 
     float lifespan;
-    Func<float> getInputAngle;
     Transform transform;
+    CreatureController creature;
 
     float previousAge = 0;
     float age = 0;
@@ -25,26 +25,17 @@ public class CreatureMovement
     public float MinAngle { get => minAngle; }
     public float MaxAngle { get => maxAngle; }
 
-    public void Initialize(float lifespan, Func<float> getInputAngle, Transform transform)
+    public void Initialize(float lifespan, Transform transform)
     {
         this.lifespan = lifespan;
-        this.getInputAngle = getInputAngle;
         this.transform = transform;
+
+        creature = transform.GetComponent<CreatureController>();
 
         seed = UnityEngine.Random.Range(0f, 100f);
 
         NormalizeSpeedCurve();
         EnsureMinMaxDirections();
-    }
-
-    public void NotifyConvertedToPlayer(Func<float> getInputAngle)
-    {
-        this.getInputAngle = getInputAngle;
-    }
-
-    public void NotifyConvertedToNonPlayer()
-    {
-        getInputAngle = null;
     }
 
     public void Update(float age)
@@ -80,10 +71,10 @@ public class CreatureMovement
 
     Vector2 GetCurrentDirection()
     {
-        if (getInputAngle == null)
-            return GetRandomMoveDirection();
-        else
+        if (creature.IsPlayer)
             return GetPlayerMoveDirection();
+        else
+            return GetRandomMoveDirection();
     }
 
     Vector2 GetRandomMoveDirection()
@@ -100,7 +91,7 @@ public class CreatureMovement
 
     public Vector2 GetPlayerMoveDirection()
     {
-        float angle = getInputAngle();
+        float angle = PlayerModule.GetMoveAngle(from: transform);
         angle = angle.ClampAngleRad(minAngle, maxAngle);
 
 #if UNITY_EDITOR
